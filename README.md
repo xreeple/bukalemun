@@ -25,3 +25,6 @@ It was built to enhance data privacy and help comply with regulations such as GD
 - Encrypting personal data (e.g., name, national ID, phone number, email, etc.)
 - Enhancing data security at the application layer
 - Providing masked data to minimize data leakage risk
+
+## 📄 License
+MIT License
