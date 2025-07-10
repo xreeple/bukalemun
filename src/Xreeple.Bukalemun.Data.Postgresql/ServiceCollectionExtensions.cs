@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
 
         builder.Services.AddSingleton<IDbContext>(_ => dbContext);
 
-        builder.Services.AddScoped<ICamouflagedRepository, CamouflagedRepository>();
+        builder.Services.AddScoped<ICamouflageRepository, CamouflageRepository>();
 
         return builder;
     }

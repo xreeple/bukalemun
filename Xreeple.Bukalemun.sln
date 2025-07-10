@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.AspNet", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Services", "src\Xreeple.Bukalemun.Services\Xreeple.Bukalemun.Services.csproj", "{113DFB36-D9FF-433D-AB89-AECE85FC1B3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Providers", "src\Xreeple.Bukalemun.Providers\Xreeple.Bukalemun.Providers.csproj", "{7B007E30-4425-4EE2-BD20-FEF7FF64F33F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{113DFB36-D9FF-433D-AB89-AECE85FC1B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{113DFB36-D9FF-433D-AB89-AECE85FC1B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{113DFB36-D9FF-433D-AB89-AECE85FC1B3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B007E30-4425-4EE2-BD20-FEF7FF64F33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B007E30-4425-4EE2-BD20-FEF7FF64F33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B007E30-4425-4EE2-BD20-FEF7FF64F33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B007E30-4425-4EE2-BD20-FEF7FF64F33F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,5 +49,6 @@ Global
 		{0DDBBA77-4448-4F22-B8CE-A15EF4A8239B} = {E580BFFE-A50A-46DA-9042-05EE0AFB98AA}
 		{CA91BA56-FCE3-4093-AB77-7EF93BD3D143} = {E580BFFE-A50A-46DA-9042-05EE0AFB98AA}
 		{113DFB36-D9FF-433D-AB89-AECE85FC1B3D} = {E580BFFE-A50A-46DA-9042-05EE0AFB98AA}
+		{7B007E30-4425-4EE2-BD20-FEF7FF64F33F} = {E580BFFE-A50A-46DA-9042-05EE0AFB98AA}
 	EndGlobalSection
 EndGlobal

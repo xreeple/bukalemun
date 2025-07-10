@@ -1,4 +1,4 @@
 ﻿namespace Xreeple.Bukalemun.Data.Abstractions;
-public interface ICamouflagedRepository
+public interface ICamouflageRepository
 {
 }

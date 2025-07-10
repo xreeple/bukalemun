@@ -7,9 +7,6 @@ public static class ApplicationBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(app);
 
-        app.UseExceptionHandler();
-        app.UseStatusCodePages();
-
         return app;
     }
 }
