@@ -14,6 +14,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Services"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Providers", "src\Xreeple.Bukalemun.Providers\Xreeple.Bukalemun.Providers.csproj", "{7B007E30-4425-4EE2-BD20-FEF7FF64F33F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{2D53659D-B330-41B7-8D8D-1478AD942B7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bukalemun.Api", "samples\Bukalemun.Api\Bukalemun.Api.csproj", "{4591C69F-AEFD-4A80-8A86-F54E222512B5}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5F6D4078-6BF9-4E5A-88DF-3A0322498633}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +46,14 @@ Global
 		{7B007E30-4425-4EE2-BD20-FEF7FF64F33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B007E30-4425-4EE2-BD20-FEF7FF64F33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B007E30-4425-4EE2-BD20-FEF7FF64F33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4591C69F-AEFD-4A80-8A86-F54E222512B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4591C69F-AEFD-4A80-8A86-F54E222512B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4591C69F-AEFD-4A80-8A86-F54E222512B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4591C69F-AEFD-4A80-8A86-F54E222512B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F6D4078-6BF9-4E5A-88DF-3A0322498633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F6D4078-6BF9-4E5A-88DF-3A0322498633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F6D4078-6BF9-4E5A-88DF-3A0322498633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F6D4078-6BF9-4E5A-88DF-3A0322498633}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +64,6 @@ Global
 		{CA91BA56-FCE3-4093-AB77-7EF93BD3D143} = {E580BFFE-A50A-46DA-9042-05EE0AFB98AA}
 		{113DFB36-D9FF-433D-AB89-AECE85FC1B3D} = {E580BFFE-A50A-46DA-9042-05EE0AFB98AA}
 		{7B007E30-4425-4EE2-BD20-FEF7FF64F33F} = {E580BFFE-A50A-46DA-9042-05EE0AFB98AA}
+		{4591C69F-AEFD-4A80-8A86-F54E222512B5} = {2D53659D-B330-41B7-8D8D-1478AD942B7D}
 	EndGlobalSection
 EndGlobal
