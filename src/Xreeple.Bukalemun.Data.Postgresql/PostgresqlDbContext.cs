@@ -10,32 +10,33 @@ public class PostgresqlDbContext(string connectionString, string schema) : IDbCo
 
     public void Migration()
     {
+        var stores = new List<string>
+        {
+            "Default"
+        };
+
         using var connection = CreateConnection();
 
-        string defaultCamouflagedTableName = "Default";
-
-        if (schema != "bukalemun")
+        foreach (var store in stores)
         {
-            defaultCamouflagedTableName = "bukalemun." + defaultCamouflagedTableName;
+            var sql = $"""
+                CREATE SCHEMA IF NOT EXISTS '{schema}';
+
+                SET search_path = '{schema}';
+
+                CREATE TABLE IF NOT EXISTS "{store}" (
+                    "TableName" TEXT NOT NULL,
+                    "PrimaryKey" TEXT NOT NULL,
+                    "ColumnName" TEXT NOT NULL,
+                    "Encrypted" bytea,
+                    "Hashed" TEXT,
+                    "CreatedAt" TIMESTAMP NOT NULL,
+                    "UpdatedAt" TIMESTAMP NOT NULL,
+                    PRIMARY KEY ("TableName", "PrimaryKey", "ColumnName")
+                );
+            """;
+
+            connection.Execute(sql);
         }
-
-        var sql = $"""
-            CREATE SCHEMA IF NOT EXISTS {schema};
-
-            SET search_path = '{schema}';
-
-            CREATE TABLE IF NOT EXISTS "{defaultCamouflagedTableName}" (
-                "TableName" TEXT NOT NULL,
-                "PrimaryKey" TEXT NOT NULL,
-                "ColumnName" TEXT NOT NULL,
-                "Encrypted" bytea,
-                "Hashed" TEXT,
-                "CreatedAt" TIMESTAMP NOT NULL,
-                "UpdatedAt" TIMESTAMP NOT NULL,
-                PRIMARY KEY ("TableName", "PrimaryKey", "ColumnName")
-            );
-        """;
-
-        connection.Execute(sql);
     }
 }

@@ -8,16 +8,15 @@ namespace Xreeple.Bukalemun.Data.Postgresql;
 public static class ServiceCollectionExtensions
 {
     private const string DefaultConnectionStringName = "DefaultConnection";
-    private const string DefaultSchema = "bukalemun";
 
-    public static BukalemunBuilder UseNpgsql(this BukalemunBuilder builder, string connectionStringName, string schema = DefaultSchema)
+    public static BukalemunBuilder UseNpgsql(this BukalemunBuilder builder, string connectionStringName, string appName)
     {
         ArgumentNullException.ThrowIfNull(builder);
 
         var connectionString = builder.Configuration.GetConnectionString(connectionStringName) ??
             throw new InvalidOperationException($"Connection string '{connectionStringName}' not found.");
 
-        var dbContext = new PostgresqlDbContext(connectionString, schema);
+        var dbContext = new PostgresqlDbContext(connectionString, "bukalemun." + appName.ToLower());
 
         dbContext.Migration();
 
@@ -28,13 +27,8 @@ public static class ServiceCollectionExtensions
         return builder;
     }
 
-    public static BukalemunBuilder UseNpgsql(this BukalemunBuilder builder)
+    public static BukalemunBuilder UseNpgsql(this BukalemunBuilder builder, string appName)
     {
-        return UseNpgsql(builder, DefaultConnectionStringName, DefaultSchema);
-    }
-
-    public static BukalemunBuilder UseNpgsql(this BukalemunBuilder builder, string schema)
-    {
-        return UseNpgsql(builder, DefaultConnectionStringName, schema);
+        return UseNpgsql(builder, DefaultConnectionStringName, appName);
     }
 }
