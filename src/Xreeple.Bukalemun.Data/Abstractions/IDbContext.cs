@@ -4,5 +4,5 @@ namespace Xreeple.Bukalemun.Data.Abstractions;
 public interface IDbContext
 {
     IDbConnection CreateConnection();
-    void Migration();
+    void Migration(HashSet<string> stores);
 }

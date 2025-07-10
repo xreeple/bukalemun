@@ -18,7 +18,9 @@ public static class ServiceCollectionExtensions
 
         var dbContext = new PostgresqlDbContext(connectionString, "bukalemun." + appName.ToLower());
 
-        dbContext.Migration();
+        var stores = builder.Configuration.GetSection("Bukalemun:Stores").Get<HashSet<string>>()!;
+
+        dbContext.Migration(stores);
 
         builder.Services.AddSingleton<IDbContext>(_ => dbContext);
 

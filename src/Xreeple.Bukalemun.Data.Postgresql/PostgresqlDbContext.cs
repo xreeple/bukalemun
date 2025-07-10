@@ -8,19 +8,19 @@ public class PostgresqlDbContext(string connectionString, string schema) : IDbCo
 {
     public IDbConnection CreateConnection() => new NpgsqlConnection(connectionString);
 
-    public void Migration()
+    public void Migration(HashSet<string> stores)
     {
-        var stores = new List<string>
+        if (stores.Count == 0)
         {
-            "Default"
-        };
+            stores.Add("Default");
+        }
 
         using var connection = CreateConnection();
 
         foreach (var store in stores)
         {
             var sql = $"""
-                CREATE SCHEMA IF NOT EXISTS '{schema}';
+                CREATE SCHEMA IF NOT EXISTS "{schema}";
 
                 SET search_path = '{schema}';
 

@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Xreeple.Bukalemun.AspNet\Xreeple.Bukalemun.AspNet.csproj" />
+    <ProjectReference Include="..\..\src\Xreeple.Bukalemun.Data.Postgresql\Xreeple.Bukalemun.Data.Postgresql.csproj" />
+  </ItemGroup>
+
 </Project>
