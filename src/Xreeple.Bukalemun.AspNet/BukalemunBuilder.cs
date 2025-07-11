@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Xreeple.Bukalemun.AspNet;
+
 public class BukalemunBuilder(IServiceCollection services, IConfiguration configuration)
 {
     public IServiceCollection Services { get; } = services;

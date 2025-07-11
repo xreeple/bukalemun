@@ -1,4 +1,5 @@
 ﻿namespace Xreeple.Bukalemun.Data.Entites;
+
 public class Camouflaged
 {
     public string Store { get; set; } = null!;

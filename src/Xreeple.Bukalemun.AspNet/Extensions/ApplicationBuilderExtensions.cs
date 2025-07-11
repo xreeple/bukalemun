@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Xreeple.Bukalemun.Services.Options;
 
 namespace Xreeple.Bukalemun.AspNet.Extensions;
+
 public static class ApplicationBuilderExtensions
 {
     public static IApplicationBuilder UseBukalemun(this IApplicationBuilder app)

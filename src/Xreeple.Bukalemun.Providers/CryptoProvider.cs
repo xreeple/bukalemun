@@ -1,8 +1,9 @@
-﻿using CryptoNet;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using CryptoNet;
 using Xreeple.Bukalemun.Providers.Abstractions;
 
 namespace Xreeple.Bukalemun.Providers;
+
 public class CryptoProvider : ICryptoProvider
 {
     private byte[] GetByteArray(int sizeInKb)
@@ -11,8 +12,8 @@ public class CryptoProvider : ICryptoProvider
         byte[] b = new byte[sizeInKb]; // convert kb to byte
         rnd.NextBytes(b);
         return b;
-
     }
+
     public byte[]? Encrypt(string key, string content)
     {
         string _key = "V8vl8wrpMAjjKqq02wsjYVctgUC5GnPVfuEGZ/d3VZA=";
@@ -50,7 +51,6 @@ public class CryptoProvider : ICryptoProvider
             var encryptClient = new CryptoNetAes(key_ba, iv_ba2);
 
             var decrypt = encryptClient.DecryptToString(content_ba);
-
 
             Debug.WriteLine("Decrypt: " + decrypt);
         }

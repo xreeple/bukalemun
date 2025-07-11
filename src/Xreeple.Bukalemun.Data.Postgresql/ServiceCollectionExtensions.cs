@@ -5,21 +5,29 @@ using Xreeple.Bukalemun.Data.Abstractions;
 using Xreeple.Bukalemun.Data.Postgresql.Repositories;
 
 namespace Xreeple.Bukalemun.Data.Postgresql;
+
 public static class ServiceCollectionExtensions
 {
     private const string DefaultConnectionStringName = "DefaultConnection";
 
-    public static BukalemunBuilder UseNpgsql(this BukalemunBuilder builder, string connectionStringName, string appName)
+    public static BukalemunBuilder UseNpgsql(
+        this BukalemunBuilder builder,
+        string connectionStringName,
+        string appName
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        var connectionString = builder.Configuration.GetConnectionString(connectionStringName) ??
-            throw new InvalidOperationException($"Connection string '{connectionStringName}' not found.");
+        var connectionString =
+            builder.Configuration.GetConnectionString(connectionStringName)
+            ?? throw new InvalidOperationException(
+                $"Connection string '{connectionStringName}' not found."
+            );
 
         var dbContext = new PostgresqlDbContext(connectionString, "bukalemun." + appName.ToLower());
 
-        var stores = builder.Configuration
-            .GetSection("Bukalemun:Stores")
+        var stores = builder
+            .Configuration.GetSection("Bukalemun:Stores")
             .GetChildren()
             .Select(m => m.Key)
             .ToHashSet();
