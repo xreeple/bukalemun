@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Xreeple.Bukalemun.Providers\Xreeple.Bukalemun.Providers.csproj" />
 	  <ProjectReference Include="..\Xreeple.Bukalemun.Services\Xreeple.Bukalemun.Services.csproj" />
 	</ItemGroup>
 

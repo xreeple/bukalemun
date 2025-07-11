@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xreeple.Bukalemun.Data\Xreeple.Bukalemun.Data.csproj" />
+    <ProjectReference Include="..\Xreeple.Bukalemun.Providers\Xreeple.Bukalemun.Providers.csproj" />
+  </ItemGroup>
+
 </Project>
