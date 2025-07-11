@@ -38,4 +38,26 @@ public class CamouflageRepository(IDbContext _dbContext) : ICamouflageRepository
 
         return connection.Execute(sql, camouflaged) == 1;
     }
+
+    public Camouflaged? Get(string store, string tableName, string primaryKey, string columnName)
+    {
+        using var connection = _dbContext.CreateConnection();
+
+        var sql = $"""
+                SELECT * FROM "{store}"
+                WHERE "TableName" = @TableName
+                AND "PrimaryKey" = @PrimaryKey
+                AND "ColumnName" = @ColumnName
+            """;
+
+        return connection.QueryFirstOrDefault<Camouflaged>(
+            sql,
+            new
+            {
+                TableName = tableName,
+                PrimaryKey = primaryKey,
+                ColumnName = columnName,
+            }
+        );
+    }
 }

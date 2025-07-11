@@ -1,29 +1,35 @@
-﻿using System.Data;
-using Dapper;
+﻿using Dapper;
 using Npgsql;
+using System.Data;
 using Xreeple.Bukalemun.Data.Abstractions;
 
 namespace Xreeple.Bukalemun.Data.Postgresql;
 
-public class PostgresqlDbContext(string connectionString, string schema) : IDbContext
+public class PostgresqlDbContext(string _connectionString, string _schema) : IDbContext
 {
-    public IDbConnection CreateConnection() => new NpgsqlConnection(connectionString);
+    public IDbConnection CreateConnection()
+    {
+        var connection = new NpgsqlConnection(_connectionString);
+
+        connection.Open();
+        connection.Execute($"SET search_path = '{_schema}'");
+
+        return connection;
+    }
 
     public void Migration(HashSet<string> stores)
     {
         if (stores.Count == 0)
-        {
-            stores.Add("Default");
-        }
+            return;
 
         using var connection = CreateConnection();
 
         foreach (var store in stores)
         {
             var sql = $"""
-                    CREATE SCHEMA IF NOT EXISTS "{schema}";
+                    CREATE SCHEMA IF NOT EXISTS "{_schema}";
 
-                    SET search_path = '{schema}';
+                    SET search_path = '{_schema}';
 
                     CREATE TABLE IF NOT EXISTS "{store}" (
                         "TableName" TEXT NOT NULL,

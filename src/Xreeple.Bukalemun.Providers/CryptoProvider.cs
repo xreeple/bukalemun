@@ -1,60 +1,38 @@
-﻿using System.Diagnostics;
-using CryptoNet;
+﻿using CryptoNet;
 using Xreeple.Bukalemun.Providers.Abstractions;
 
 namespace Xreeple.Bukalemun.Providers;
 
 public class CryptoProvider : ICryptoProvider
 {
-    private byte[] GetByteArray(int sizeInKb)
+    public byte[] Encrypt(string key, string content)
     {
-        Random rnd = new Random();
-        byte[] b = new byte[sizeInKb]; // convert kb to byte
-        rnd.NextBytes(b);
-        return b;
+        byte[] _key = Convert.FromBase64String(key);
+        byte[] _iv = RandomByteArray(16);
+
+        var encrypt = new CryptoNetAes(_key, _iv).EncryptFromString(content);
+
+        encrypt = [.. _iv, .. encrypt];
+
+        return encrypt;
     }
 
-    public byte[]? Encrypt(string key, string content)
+    public string Decrypt(string key, byte[] content)
     {
-        string _key = "V8vl8wrpMAjjKqq02wsjYVctgUC5GnPVfuEGZ/d3VZA=";
-        string _iv = "fUmz8IYi+0tGtRpBvxCX1g==";
+        byte[] _key = Convert.FromBase64String(key);
+        byte[] _iv = content[..16];
+        byte[] _content = content[16..];
 
-        byte[] key_ba = Convert.FromBase64String(_key);
-        byte[] iv_ba = Convert.FromBase64String(_iv);
+        var decrypt = new CryptoNetAes(_key, _iv).DecryptToString(_content);
 
-        List<string> items = new List<string>();
+        return decrypt;
+    }
 
-        for (int i = 0; i < 10; i++)
-        {
-            iv_ba = GetByteArray(16);
+    private static byte[] RandomByteArray(int size)
+    {
+        byte[] b = new byte[size];
+        new Random().NextBytes(b);
 
-            var encryptClient = new CryptoNetAes(key_ba, iv_ba);
-
-            var encrypt = encryptClient.EncryptFromString(content);
-
-            encrypt = [.. iv_ba, .. encrypt];
-
-            var base64 = System.Convert.ToBase64String(encrypt);
-
-            items.Add(base64);
-
-            Debug.WriteLine("Encrypt: " + base64);
-        }
-
-        foreach (var item in items)
-        {
-            var itemContent = Convert.FromBase64String(item);
-
-            var iv_ba2 = itemContent[..16];
-            var content_ba = itemContent[16..];
-
-            var encryptClient = new CryptoNetAes(key_ba, iv_ba2);
-
-            var decrypt = encryptClient.DecryptToString(content_ba);
-
-            Debug.WriteLine("Decrypt: " + decrypt);
-        }
-
-        return null;
+        return b;
     }
 }
