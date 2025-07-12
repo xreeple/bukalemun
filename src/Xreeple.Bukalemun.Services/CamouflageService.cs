@@ -72,13 +72,11 @@ public class CamouflageService(
 
         var result = camouflaged.Select(m => new Uncamouflaged()
         {
-            Store = m.Store,
-            TableName = m.TableName,
-            PrimaryKey = m.PrimaryKey,
-            ColumnName = m.ColumnName,
+            Key = m.PrimaryKey,
+            Name = m.ColumnName,
             Value = m.Encrypted is not null
                 ? _cryptoProvider.Decrypt(
-                    _bukalemunOptions.Value.Stores[m.Store].EncryptKey,
+                    _bukalemunOptions.Value.Stores[store].EncryptKey,
                     m.Encrypted
                 )
                 : null,

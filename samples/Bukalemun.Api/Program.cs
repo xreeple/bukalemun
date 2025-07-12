@@ -16,9 +16,12 @@ app.MapGet(
     ([FromServices] ICamouflageService camouflageService) =>
     {
         camouflageService.Create("Default", "users", "2", "name", "John Doe");
-        var uncamouflaged = camouflageService.Get("Default", "users", "2", "name");
+        camouflageService.Create("Default", "users", "2", "email", "john.doe@gmail.com");
+        //var uncamouflaged = camouflageService.Get("Default", "users", "2", "name");
 
-        return "";
+        var test = camouflageService.Get("Default", "users", ["1", "2"], ["name", "email"]);
+
+        return test;
     }
 );
 

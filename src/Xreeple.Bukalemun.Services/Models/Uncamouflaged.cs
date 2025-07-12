@@ -2,9 +2,7 @@
 
 public class Uncamouflaged
 {
-    public required string Store { get; set; }
-    public required string TableName { get; set; }
-    public required string PrimaryKey { get; set; }
-    public required string ColumnName { get; set; }
+    public required string Key { get; set; }
+    public required string Name { get; set; }
     public string? Value { get; set; }
 }
