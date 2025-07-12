@@ -38,25 +38,52 @@ public class CamouflageService(
 
     public Uncamouflaged? Get(string store, string tableName, string primaryKey, string columnName)
     {
-        var camouflaged = _camouflageRepository.Get(store, tableName, primaryKey, columnName);
+        return Get(store, tableName, [primaryKey], [columnName]).FirstOrDefault();
+    }
 
-        if (camouflaged is null)
-            return null;
+    public IEnumerable<Uncamouflaged> Get(
+        string store,
+        string tableName,
+        string[] primaryKeys,
+        string columnName
+    )
+    {
+        return Get(store, tableName, primaryKeys, [columnName]);
+    }
 
-        var uncamouflaged = new Uncamouflaged()
+    public IEnumerable<Uncamouflaged> Get(
+        string store,
+        string tableName,
+        string primaryKey,
+        string[] columnNames
+    )
+    {
+        return Get(store, tableName, [primaryKey], columnNames);
+    }
+
+    public IEnumerable<Uncamouflaged> Get(
+        string store,
+        string tableName,
+        string[] primaryKeys,
+        string[] columnNames
+    )
+    {
+        var camouflaged = _camouflageRepository.Get(store, tableName, primaryKeys, columnNames);
+
+        var result = camouflaged.Select(m => new Uncamouflaged()
         {
-            Store = store,
-            TableName = tableName,
-            PrimaryKey = primaryKey,
-            ColumnName = columnName,
-        };
+            Store = m.Store,
+            TableName = m.TableName,
+            PrimaryKey = m.PrimaryKey,
+            ColumnName = m.ColumnName,
+            Value = m.Encrypted is not null
+                ? _cryptoProvider.Decrypt(
+                    _bukalemunOptions.Value.Stores[m.Store].EncryptKey,
+                    m.Encrypted
+                )
+                : null,
+        });
 
-        if (camouflaged.Encrypted is not null)
-        {
-            var encryptKey = _bukalemunOptions.Value.Stores[store].EncryptKey;
-            uncamouflaged.Value = _cryptoProvider.Decrypt(encryptKey, camouflaged.Encrypted);
-        }
-
-        return uncamouflaged;
+        return result;
     }
 }
