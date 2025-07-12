@@ -1,4 +1,4 @@
-﻿using Xreeple.Bukalemun.Data.Entites;
+﻿using Xreeple.Bukalemun.Services.Models;
 
 namespace Xreeple.Bukalemun.Services.Abstractions;
 

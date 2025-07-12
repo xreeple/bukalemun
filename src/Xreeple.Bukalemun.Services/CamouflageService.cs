@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
 using Xreeple.Bukalemun.Data.Abstractions;
-using Xreeple.Bukalemun.Data.Entites;
 using Xreeple.Bukalemun.Providers.Abstractions;
 using Xreeple.Bukalemun.Services.Abstractions;
+using Xreeple.Bukalemun.Services.Models;
 using Xreeple.Bukalemun.Services.Options;
 
 namespace Xreeple.Bukalemun.Services;
@@ -25,7 +25,7 @@ public class CamouflageService(
         var encrypted = _cryptoProvider.Encrypt(encryptKey, value);
 
         _camouflageRepository.Upsert(
-            new Camouflaged()
+            new Data.Entites.Camouflaged()
             {
                 Store = store,
                 TableName = tableName,
