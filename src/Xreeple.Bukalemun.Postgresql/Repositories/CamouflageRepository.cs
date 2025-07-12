@@ -2,7 +2,7 @@
 using Xreeple.Bukalemun.Data.Abstractions;
 using Xreeple.Bukalemun.Data.Entites;
 
-namespace Xreeple.Bukalemun.Data.Postgresql.Repositories;
+namespace Xreeple.Bukalemun.Postgresql.Repositories;
 
 public class CamouflageRepository(IDbContext _dbContext) : ICamouflageRepository
 {

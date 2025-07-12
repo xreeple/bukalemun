@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Xreeple.Bukalemun.AspNet\Xreeple.Bukalemun.AspNet.csproj" />
-    <ProjectReference Include="..\..\src\Xreeple.Bukalemun.Data.Postgresql\Xreeple.Bukalemun.Data.Postgresql.csproj" />
+    <ProjectReference Include="..\..\src\Xreeple.Bukalemun.Postgresql\Xreeple.Bukalemun.Postgresql.csproj" />
+    <ProjectReference Include="..\..\src\Xreeple.Bukalemun\Xreeple.Bukalemun.csproj" />
   </ItemGroup>
 
 </Project>

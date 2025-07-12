@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Xreeple.Bukalemun.AspNet;
 using Xreeple.Bukalemun.Data.Abstractions;
-using Xreeple.Bukalemun.Data.Postgresql.Repositories;
+using Xreeple.Bukalemun.Postgresql.Repositories;
 
-namespace Xreeple.Bukalemun.Data.Postgresql;
+namespace Xreeple.Bukalemun.Postgresql;
 
 public static class ServiceCollectionExtensions
 {

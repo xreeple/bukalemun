@@ -25,7 +25,7 @@ public class CamouflageService(
         var encrypted = _cryptoProvider.Encrypt(encryptKey, value);
 
         _camouflageRepository.Upsert(
-            new Data.Entites.Camouflaged()
+            new Camouflaged()
             {
                 Store = store,
                 TableName = tableName,

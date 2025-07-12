@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Xreeple.Bukalemun.AspNet.Extensions;
-using Xreeple.Bukalemun.Data.Postgresql;
+using Xreeple.Bukalemun.Postgresql;
 using Xreeple.Bukalemun.Services.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);

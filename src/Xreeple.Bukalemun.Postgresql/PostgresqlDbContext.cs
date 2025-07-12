@@ -1,9 +1,9 @@
-﻿using Dapper;
+﻿using System.Data;
+using Dapper;
 using Npgsql;
-using System.Data;
 using Xreeple.Bukalemun.Data.Abstractions;
 
-namespace Xreeple.Bukalemun.Data.Postgresql;
+namespace Xreeple.Bukalemun.Postgresql;
 
 public class PostgresqlDbContext(string _connectionString, string _schema) : IDbContext
 {
