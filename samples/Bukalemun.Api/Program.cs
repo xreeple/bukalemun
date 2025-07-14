@@ -1,3 +1,4 @@
+using System.Transactions;
 using Microsoft.AspNetCore.Mvc;
 using Xreeple.Bukalemun.AspNet.Extensions;
 using Xreeple.Bukalemun.Postgresql;
@@ -15,8 +16,20 @@ app.MapGet(
     "/sample-1",
     ([FromServices] ICamouflageService camouflageService) =>
     {
-        camouflageService.Create("Default", "users", "2", "name", "John Doe");
-        camouflageService.Create("Default", "users", "2", "email", "john.doe@gmail.com");
+        using (var scope = new TransactionScope(TransactionScopeOption.Required))
+        {
+            camouflageService.Create("Default", "users", "2", "name", "John Doe");
+
+            scope.Complete();
+        }
+
+        using (var scope = new TransactionScope(TransactionScopeOption.Required))
+        {
+            camouflageService.Create("Default", "users", "2", "email", "john.doe@gmail.com");
+
+            scope.Complete();
+        }
+
         //var uncamouflaged = camouflageService.Get("Default", "users", "2", "name");
 
         var test = camouflageService.Get("Default", "users", ["1", "2"], ["name", "email"]);
