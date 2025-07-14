@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Xreeple.Bukalemun.Abstractions;
 using Xreeple.Bukalemun.Providers;
 using Xreeple.Bukalemun.Providers.Abstractions;
 using Xreeple.Bukalemun.Services;
@@ -23,6 +24,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICryptoProvider, CryptoProvider>();
 
         services.AddScoped<ICamouflageService, CamouflageService>();
+
+        services.AddScoped<IBukalemun, Bukalemun>();
 
         return new BukalemunBuilder(services, configuration);
     }

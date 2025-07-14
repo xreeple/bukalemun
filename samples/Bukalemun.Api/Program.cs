@@ -1,8 +1,8 @@
 using System.Transactions;
 using Microsoft.AspNetCore.Mvc;
+using Xreeple.Bukalemun.Abstractions;
 using Xreeple.Bukalemun.AspNet.Extensions;
 using Xreeple.Bukalemun.Postgresql;
-using Xreeple.Bukalemun.Services.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,25 +14,23 @@ var app = builder.Build();
 
 app.MapGet(
     "/sample-1",
-    ([FromServices] ICamouflageService camouflageService) =>
+    ([FromServices] IBukalemun bukalemun) =>
     {
         using (var scope = new TransactionScope(TransactionScopeOption.Required))
         {
-            camouflageService.Create("Default", "users", "2", "name", "John Doe");
+            bukalemun.Camouflage("Default", "users", "2", "name", "John Doe");
 
             scope.Complete();
         }
 
         using (var scope = new TransactionScope(TransactionScopeOption.Required))
         {
-            camouflageService.Create("Default", "users", "2", "email", "john.doe@gmail.com");
+            bukalemun.Camouflage("Default", "users", "2", "email", "john.doe@gmail.com");
 
             scope.Complete();
         }
 
-        //var uncamouflaged = camouflageService.Get("Default", "users", "2", "name");
-
-        var test = camouflageService.Get("Default", "users", ["1", "2"], ["name", "email"]);
+        var test = bukalemun.Uncamouflage("Default", "users", ["1", "2"], ["name", "email"]);
 
         return test;
     }
