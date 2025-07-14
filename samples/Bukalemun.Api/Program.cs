@@ -30,7 +30,14 @@ app.MapGet(
             scope.Complete();
         }
 
-        var test = bukalemun.Uncamouflage("Default", "users", ["1", "2"], ["name", "email"]);
+        var users = bukalemun.Uncamouflage("Default", "users", ["1", "2"], ["name", "email"]);
+
+        var test = bukalemun.Uncamouflage<BukalemunUser>(
+            "Default",
+            "users",
+            ["1", "2"],
+            ["name", "email"]
+        );
 
         return test;
     }
@@ -46,3 +53,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.Run();
+
+public class BukalemunUser
+{
+    public string Id { get; set; } = null!;
+    public string Name { get; set; } = null!;
+    public string Email { get; set; } = null!;
+}

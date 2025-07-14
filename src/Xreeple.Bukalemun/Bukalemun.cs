@@ -1,4 +1,5 @@
 ﻿using Xreeple.Bukalemun.Abstractions;
+using Xreeple.Bukalemun.Extensions;
 using Xreeple.Bukalemun.Services.Abstractions;
 using Xreeple.Bukalemun.Services.Models;
 
@@ -25,5 +26,16 @@ public class Bukalemun(ICamouflageService _camouflageService) : IBukalemun
     )
     {
         return _camouflageService.Get(store, tableName, primaryKeys, columnNames);
+    }
+
+    public IEnumerable<T> Uncamouflage<T>(
+        string store,
+        string tableName,
+        string[] primaryKeys,
+        string[] columnNames
+    )
+        where T : new()
+    {
+        return Uncamouflage(store, tableName, primaryKeys, columnNames).MapTo<T>();
     }
 }
