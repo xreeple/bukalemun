@@ -13,7 +13,7 @@ public static class ServiceCollectionExtensions
     public static BukalemunBuilder UseNpgsql(
         this BukalemunBuilder builder,
         string connectionStringName,
-        string appName
+        string schema
     )
     {
         ArgumentNullException.ThrowIfNull(builder);
@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
                 $"Connection string '{connectionStringName}' not found."
             );
 
-        var dbContext = new PostgresqlDbContext(connectionString, "bukalemun." + appName.ToLower());
+        var dbContext = new PostgresqlDbContext(connectionString, schema);
 
         var stores = builder
             .Configuration.GetSection("Bukalemun:Stores")
@@ -41,8 +41,13 @@ public static class ServiceCollectionExtensions
         return builder;
     }
 
-    public static BukalemunBuilder UseNpgsql(this BukalemunBuilder builder, string appName)
+    public static BukalemunBuilder UseNpgsql(this BukalemunBuilder builder, string schema)
     {
-        return UseNpgsql(builder, DefaultConnectionStringName, appName);
+        return UseNpgsql(builder, DefaultConnectionStringName, schema);
+    }
+
+    public static BukalemunBuilder UseNpgsql(this BukalemunBuilder builder)
+    {
+        return UseNpgsql(builder, DefaultConnectionStringName, "public");
     }
 }

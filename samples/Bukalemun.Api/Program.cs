@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 
-builder.Services.AddBukalemun(builder.Configuration).UseNpgsql("app1");
+builder.Services.AddBukalemun(builder.Configuration).UseNpgsql();
 
 var app = builder.Build();
 
@@ -48,7 +48,7 @@ app.MapGet(
 
         var test3 = bukalemun.Uncamouflage<BukalemunUser>("Default", "users", ["1", "2"], "name");
 
-        var test4 = bukalemun.Uncamouflage<BukalemunUser>("Default", "users", "1", "name");
+        var test4 = bukalemun.Uncamouflage<BukalemunUser>("Default", "users", "2", "name");
 
         return test4;
     }
