@@ -59,8 +59,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-//app.UseBukalemun();
-
 app.UseHttpsRedirection();
 
 app.Run();
