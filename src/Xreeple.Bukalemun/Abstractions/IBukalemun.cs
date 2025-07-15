@@ -12,10 +12,31 @@ public interface IBukalemun
         string value
     );
 
+    Uncamouflaged? Uncamouflage(
+        string store,
+        string tableName,
+        string primaryKey,
+        string columnName
+    );
+
     IEnumerable<Uncamouflaged> Uncamouflage(
         string store,
         string tableName,
         string[] primaryKeys,
+        string[] columnNames
+    );
+
+    IEnumerable<Uncamouflaged> Uncamouflage(
+        string store,
+        string tableName,
+        string[] primaryKeys,
+        string columnName
+    );
+
+    IEnumerable<Uncamouflaged> Uncamouflage(
+        string store,
+        string tableName,
+        string primaryKey,
         string[] columnNames
     );
 
@@ -25,5 +46,24 @@ public interface IBukalemun
         string[] primaryKeys,
         string[] columnNames
     )
+        where T : new();
+
+    IEnumerable<T> Uncamouflage<T>(
+        string store,
+        string tableName,
+        string primaryKey,
+        string[] columnNames
+    )
+        where T : new();
+
+    IEnumerable<T> Uncamouflage<T>(
+        string store,
+        string tableName,
+        string[] primaryKeys,
+        string columnName
+    )
+        where T : new();
+
+    T Uncamouflage<T>(string store, string tableName, string primaryKey, string columnName)
         where T : new();
 }

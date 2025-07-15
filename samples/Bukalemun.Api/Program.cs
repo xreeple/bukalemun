@@ -32,14 +32,25 @@ app.MapGet(
 
         var users = bukalemun.Uncamouflage("Default", "users", ["1", "2"], ["name", "email"]);
 
-        var test = bukalemun.Uncamouflage<BukalemunUser>(
+        var test1 = bukalemun.Uncamouflage<BukalemunUser>(
             "Default",
             "users",
             ["1", "2"],
             ["name", "email"]
         );
 
-        return test;
+        var test2 = bukalemun.Uncamouflage<BukalemunUser>(
+            "Default",
+            "users",
+            "1",
+            ["name", "email"]
+        );
+
+        var test3 = bukalemun.Uncamouflage<BukalemunUser>("Default", "users", ["1", "2"], "name");
+
+        var test4 = bukalemun.Uncamouflage<BukalemunUser>("Default", "users", "1", "name");
+
+        return test4;
     }
 );
 
