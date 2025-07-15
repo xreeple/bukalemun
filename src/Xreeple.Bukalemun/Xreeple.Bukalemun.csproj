@@ -7,7 +7,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Xreeple.Bukalemun.Services\Xreeple.Bukalemun.Services.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
 </Project>
