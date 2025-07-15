@@ -80,3 +80,12 @@ public class BukalemunUser
     public string Name { get; set; } = null!;
     public string Email { get; set; } = null!;
 }
+
+//[Camouflage(Store = "Users", TableName = "User")]
+//public class User
+//{
+//    public int Id { get; set; }
+
+//    [Camouflageable]
+//    public string Name { get; set; }
+//}
