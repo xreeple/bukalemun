@@ -1,4 +1,5 @@
-﻿using Xreeple.Bukalemun.Abstractions;
+﻿using System.Text.Json;
+using Xreeple.Bukalemun.Abstractions;
 using Xreeple.Bukalemun.Extensions;
 using Xreeple.Bukalemun.Services.Abstractions;
 using Xreeple.Bukalemun.Services.Models;
@@ -16,6 +17,23 @@ public class Bukalemun(ICamouflageService _camouflageService) : IBukalemun
     )
     {
         _camouflageService.Create(store, tableName, primaryKey, columnName, value);
+
+        var obj = new { Name = "Mehmet" };
+
+        var listObj1 = new List<object> { new { Name = "Mehmet" }, new { Name = "Halime" } };
+        var listObj2 = new List<object> { "Mehmet", "Halime" };
+
+        var json = JsonSerializer.SerializeToNode(listObj2);
+
+        var test = _camouflageService.CreateJson(
+            store,
+            tableName,
+            primaryKey,
+            columnName,
+            "[]",
+            json,
+            true
+        );
     }
 
     public Uncamouflaged? Uncamouflage(

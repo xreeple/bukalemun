@@ -1,5 +1,5 @@
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Transactions;
-using Microsoft.AspNetCore.Mvc;
 using Xreeple.Bukalemun.Abstractions;
 using Xreeple.Bukalemun.AspNet.Extensions;
 using Xreeple.Bukalemun.Postgresql;
@@ -20,9 +20,9 @@ app.MapGet(
         {
             bukalemun.Camouflage("Default", "users", "2", "name", "John Doe");
 
-            bukalemun.Camouflage("Default", "users", "2", "posts[].title", "John Doe");
-            bukalemun.Camouflage("Default", "users", "2", "post.comments[].content", "John Doe");
-            bukalemun.Camouflage("Default", "users", "2", "posts[0].content", "John Doe");
+            //var newJson = bukalemun.CamouflageJson("Default", "users", "2", "columnName", "fieldName -> [id].userName", json, false -> bool-> var olan key)
+            //var newJson = bukalemun.CamouflageJson("Default", "users", "2", "columnName", "fieldName -> [].userName", json, true -> bool-> oto id)
+            //var newJson = bukalemun.CamouflageJson("Default", "users", "2", "columnName", "fieldName -> userName", json, true -> bool-> oto id)
 
             scope.Complete();
         }
@@ -50,12 +50,17 @@ app.MapGet(
             ["name", "email", "data[0].title"]
         );
 
+        // Index base
         // posts[0].title
         // posts[1].title
         // posts[2].title
         // posts[0].comments[0].content
         // post.title
         // post.comments[0].content
+
+        // Key base
+        // posts[camouflageId=qweqwe-qweqweqwqwe-qweqweqwe] -> otomatik id
+        // posts[id=1] -> nesnede halihazırda olan key
 
         var test3 = bukalemun.Uncamouflage<BukalemunUser>("Default", "users", ["1", "2"], "name");
 
