@@ -90,6 +90,26 @@ public sealed class Mask
         return this;
     }
 
+    public Mask RevealInitialsPerWord()
+    {
+        bool newWord = true;
+
+        for (int i = 0; i < _input.Length; i++)
+        {
+            if (char.IsLetterOrDigit(_input[i]) && newWord)
+            {
+                _reveal[i] = true;
+                newWord = false;
+            }
+            else if (char.IsWhiteSpace(_input[i]))
+            {
+                newWord = true;
+            }
+        }
+
+        return this;
+    }
+
     public Mask RevealIf(Func<char, int, bool> predicate)
     {
         for (int i = 0; i < _input.Length; i++)
@@ -104,69 +124,42 @@ public sealed class Mask
         if (_input.Length == 0)
             return string.Empty;
 
-        // compact mod
         if (_compactStarCount.HasValue)
         {
-            var revealed = new List<(int start, int length)>();
+            var sb = new StringBuilder();
             int i = 0;
-
             while (i < _input.Length)
             {
                 if (_reveal[i])
                 {
-                    int j = i;
-                    while (j < _input.Length && _reveal[j])
-                        j++;
-                    revealed.Add((i, j - i));
-                    i = j;
+                    sb.Append(_input[i]);
+                    i++;
+                }
+                else if (char.IsWhiteSpace(_input[i]))
+                {
+                    sb.Append(_input[i]);
+                    i++;
                 }
                 else
-                    i++;
+                {
+                    while (i < _input.Length && !_reveal[i] && !char.IsWhiteSpace(_input[i]))
+                        i++;
+                    sb.Append(new string(_maskChar, _compactStarCount.Value));
+                }
             }
-
-            // sadece ilk ve son reveal için özel kural
-            if (revealed.Count == 1 && revealed[0].start == 0)
-            {
-                // baştan açıldı
-                return string.Concat(
-                    _input.AsSpan(0, revealed[0].length),
-                    new string(_maskChar, _compactStarCount.Value)
-                );
-            }
-            if (revealed.Count == 1 && revealed[0].start + revealed[0].length == _input.Length)
-            {
-                // sondan açıldı
-                return string.Concat(
-                    new string(_maskChar, _compactStarCount.Value),
-                    _input.AsSpan(revealed[0].start, revealed[0].length)
-                );
-            }
-
-            // range: ortada açık, hem önünde hem arkasında yıldız
-            if (revealed.Count == 1)
-            {
-                return string.Concat(
-                    new string(_maskChar, _compactStarCount.Value),
-                    _input.AsSpan(revealed[0].start, revealed[0].length),
-                    new string(_maskChar, _compactStarCount.Value)
-                );
-            }
+            return sb.ToString();
         }
 
-        // normal mod
-        var sb = new StringBuilder(_input.Length);
+        var sb2 = new StringBuilder(_input.Length);
 
         for (int i = 0; i < _input.Length; i++)
         {
-            char ch = _input[i];
-            if (_preserve.Contains(ch))
-                sb.Append(ch);
-            else if (_reveal[i])
-                sb.Append(ch);
+            if (_reveal[i] || _preserve.Contains(_input[i]))
+                sb2.Append(_input[i]);
             else
-                sb.Append(_maskChar);
+                sb2.Append(_maskChar);
         }
 
-        return sb.ToString();
+        return sb2.ToString();
     }
 }

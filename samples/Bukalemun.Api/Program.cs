@@ -120,11 +120,19 @@ app.MapGet(
             Mask.Build("TR1200062001190000066728")
                 .RevealFirst(4)
                 .RevealLast(2)
-                .PreserveWhitespace()
                 .MaskChar('#')
                 .ToString()
         );
-        // TR## ##################28
+        // TR####################28
+
+        Console.WriteLine(
+            Mask.Build("mehmet emin eker")
+                .RevealInitialsPerWord()
+                .PreserveWhitespace()
+                .MaskChar('#')
+                .CompactMask(4)
+                .ToString()
+        );
 
         return test4;
     }
