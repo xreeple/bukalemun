@@ -5,7 +5,7 @@ using Xreeple.Bukalemun.Data.Abstractions;
 
 namespace Xreeple.Bukalemun.Postgresql;
 
-public class PostgresqlDbContext(string _connectionString, string _schema) : IDbContext
+internal class PostgresqlDbContext(string _connectionString, string _schema) : IDbContext
 {
     public IDbConnection CreateConnection()
     {

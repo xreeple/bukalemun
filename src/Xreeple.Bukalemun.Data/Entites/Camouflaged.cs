@@ -1,6 +1,6 @@
 ﻿namespace Xreeple.Bukalemun.Data.Entites;
 
-public class Camouflaged
+internal class Camouflaged
 {
     public string Store { get; set; } = null!;
     public string TableName { get; set; } = null!;

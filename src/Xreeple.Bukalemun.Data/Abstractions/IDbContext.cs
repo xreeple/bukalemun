@@ -2,7 +2,7 @@
 
 namespace Xreeple.Bukalemun.Data.Abstractions;
 
-public interface IDbContext
+internal interface IDbContext
 {
     IDbConnection CreateConnection();
     void Migration(HashSet<string> stores);

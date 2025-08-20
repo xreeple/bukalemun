@@ -3,7 +3,7 @@ using Xreeple.Bukalemun.Providers.Abstractions;
 
 namespace Xreeple.Bukalemun.Providers;
 
-public class CryptoProvider : ICryptoProvider
+internal class CryptoProvider : ICryptoProvider
 {
     public byte[] Encrypt(string key, string content)
     {

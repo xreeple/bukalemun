@@ -2,7 +2,7 @@
 
 namespace Xreeple.Bukalemun.Data.Abstractions;
 
-public interface ICamouflageRepository
+internal interface ICamouflageRepository
 {
     bool Upsert(Camouflaged camouflaged);
     Camouflaged? Get(string store, string tableName, string primaryKey, string columnName);

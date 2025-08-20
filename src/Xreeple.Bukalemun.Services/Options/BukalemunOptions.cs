@@ -1,6 +1,6 @@
 ﻿namespace Xreeple.Bukalemun.Services.Options;
 
-public class BukalemunOptions
+internal sealed class BukalemunOptions
 {
     public Dictionary<string, Store> Stores { get; set; } = [];
 

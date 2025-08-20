@@ -4,7 +4,7 @@ using Xreeple.Bukalemun.Data.Entites;
 
 namespace Xreeple.Bukalemun.Postgresql.Repositories;
 
-public class CamouflageRepository(IDbContext _dbContext) : ICamouflageRepository
+internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageRepository
 {
     public bool Upsert(Camouflaged camouflaged)
     {

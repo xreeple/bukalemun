@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using System.Text.Json.Nodes;
 using Xreeple.Bukalemun.Data.Abstractions;
 using Xreeple.Bukalemun.Providers.Abstractions;
 using Xreeple.Bukalemun.Services.Abstractions;
@@ -8,7 +7,7 @@ using Xreeple.Bukalemun.Services.Options;
 
 namespace Xreeple.Bukalemun.Services;
 
-public class CamouflageService(
+internal sealed class CamouflageService(
     IOptions<BukalemunOptions> _bukalemunOptions,
     ICamouflageRepository _camouflageRepository,
     ICryptoProvider _cryptoProvider

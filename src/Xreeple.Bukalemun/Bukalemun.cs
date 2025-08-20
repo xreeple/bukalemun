@@ -5,7 +5,7 @@ using Xreeple.Bukalemun.Services.Models;
 
 namespace Xreeple.Bukalemun;
 
-public class Bukalemun(ICamouflageService _camouflageService) : IBukalemun
+internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukalemun
 {
     public void Camouflage(
         string store,

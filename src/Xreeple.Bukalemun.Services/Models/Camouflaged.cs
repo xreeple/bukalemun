@@ -1,6 +1,6 @@
 ﻿namespace Xreeple.Bukalemun.Services.Models;
 
-public class Camouflaged
+public sealed class Camouflaged
 {
     public string Store { get; set; } = null!;
     public string TableName { get; set; } = null!;
