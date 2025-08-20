@@ -3,6 +3,10 @@ using System.Text.RegularExpressions;
 
 namespace Xreeple.Bukalemun.Masking;
 
+/// <summary>
+/// Initializes a new instance of the <see cref="Mask"/> class with the specified input string.
+/// All characters are initially hidden (masked), and no characters are preserved by default.
+/// </summary>
 public sealed class Mask
 {
     private readonly string _input;
@@ -11,6 +15,11 @@ public sealed class Mask
     private char _maskChar = '*';
     private int? _compactStarCount = null;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Mask"/> class with the specified input string.
+    /// All characters are initially hidden (masked), and no characters are preserved by default.
+    /// </summary>
+    /// <param name="input">The input string to be masked. If null, an empty string is used.</param>
     private Mask(string input)
     {
         _input = input ?? string.Empty;
@@ -18,14 +27,29 @@ public sealed class Mask
         _preserve = [];
     }
 
+    /// <summary>
+    /// Creates a new <see cref="Mask"/> instance using the specified input string.
+    /// </summary>
+    /// <param name="input">The input string to be masked.</param>
+    /// <returns>A new instance of the <see cref="Mask"/> class.</returns>
     public static Mask Build(string input) => new(input);
 
+    /// <summary>
+    /// Sets the character that will be used to mask unrevealed characters in the input string.
+    /// </summary>
+    /// <param name="c">The masking character to use (e.g., '*', '#').</param>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask MaskChar(char c)
     {
         _maskChar = c;
         return this;
     }
 
+    /// <summary>
+    /// Enables compact masking by replacing each sequence of masked characters with a fixed number of mask characters.
+    /// </summary>
+    /// <param name="starCount">The number of mask characters to display in place of any masked segment (must be greater than 0).</param>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask CompactMask(int starCount)
     {
         if (starCount > 0)
@@ -34,6 +58,11 @@ public sealed class Mask
         return this;
     }
 
+    /// <summary>
+    /// Specifies characters that should always be preserved (i.e., not masked), regardless of reveal rules.
+    /// </summary>
+    /// <param name="chars">A string containing characters to preserve.</param>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask PreserveChars(string chars)
     {
         if (!string.IsNullOrEmpty(chars))
@@ -43,6 +72,10 @@ public sealed class Mask
         return this;
     }
 
+    /// <summary>
+    /// Preserves whitespace characters (space and tab) so they are not masked in the output.
+    /// </summary>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask PreserveWhitespace()
     {
         _preserve.Add(' ');
@@ -51,6 +84,11 @@ public sealed class Mask
         return this;
     }
 
+    /// <summary>
+    /// Reveals the first <paramref name="n"/> characters of the input string, keeping them unmasked.
+    /// </summary>
+    /// <param name="n">The number of characters to reveal from the beginning of the string.</param>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask RevealFirst(int n)
     {
         for (int i = 0; i < Math.Min(n, _reveal.Length); i++)
@@ -59,6 +97,11 @@ public sealed class Mask
         return this;
     }
 
+    /// <summary>
+    /// Reveals the last <paramref name="n"/> characters of the input string, keeping them unmasked.
+    /// </summary>
+    /// <param name="n">The number of characters to reveal from the end of the string.</param>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask RevealLast(int n)
     {
         int len = _reveal.Length;
@@ -69,6 +112,12 @@ public sealed class Mask
         return this;
     }
 
+    /// <summary>
+    /// Reveals a range of characters in the input string starting at the specified index.
+    /// </summary>
+    /// <param name="start">The zero-based starting index of the range to reveal.</param>
+    /// <param name="length">The number of characters to reveal from the starting index.</param>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask RevealRange(int start, int length)
     {
         int end = Math.Min(_reveal.Length, start + length);
@@ -79,6 +128,12 @@ public sealed class Mask
         return this;
     }
 
+    /// <summary>
+    /// Reveals all characters in the input string that match the specified regular expression pattern.
+    /// </summary>
+    /// <param name="pattern">The regular expression pattern to match.</param>
+    /// <param name="options">Optional regex options for matching.</param>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask RevealRegex(string pattern, RegexOptions options = RegexOptions.None)
     {
         foreach (Match m in Regex.Matches(_input, pattern, options))
@@ -90,6 +145,11 @@ public sealed class Mask
         return this;
     }
 
+    /// <summary>
+    /// Reveals the first alphanumeric character (initial) of each word in the input string.
+    /// Words are separated by whitespace characters.
+    /// </summary>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask RevealInitialsPerWord()
     {
         bool newWord = true;
@@ -110,6 +170,11 @@ public sealed class Mask
         return this;
     }
 
+    /// <summary>
+    /// Reveals characters in the input string that satisfy the specified predicate function.
+    /// </summary>
+    /// <param name="predicate">A function that takes a character and its index, returning true if the character should be revealed.</param>
+    /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
     public Mask RevealIf(Func<char, int, bool> predicate)
     {
         for (int i = 0; i < _input.Length; i++)
@@ -119,6 +184,11 @@ public sealed class Mask
         return this;
     }
 
+    /// <summary>
+    /// Returns the masked string according to the reveal and preserve rules.
+    /// If compact masking is enabled, consecutive masked characters are replaced with a fixed number of mask characters.
+    /// </summary>
+    /// <returns>The masked string.</returns>
     public override string ToString()
     {
         if (_input.Length == 0)
