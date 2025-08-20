@@ -1,5 +1,5 @@
-﻿using System.Transactions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Transactions;
 using Xreeple.Bukalemun.Abstractions;
 using Xreeple.Bukalemun.AspNet.Extensions;
 using Xreeple.Bukalemun.Masking;

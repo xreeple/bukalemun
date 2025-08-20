@@ -11,10 +11,14 @@ namespace Xreeple.Bukalemun.AspNet.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static BukalemunBuilder AddBukalemun(
-        this IServiceCollection services,
-        IConfiguration configuration
-    )
+    /// <summary>
+    /// Extension method to register Bukalemun services and options in the dependency injection container.
+    /// </summary>
+    /// <param name="services">The service collection to add the Bukalemun services to.</param>
+    /// <param name="configuration">The application configuration containing Bukalemun settings.</param>
+    /// <returns>A <see cref="BukalemunBuilder"/> to allow further Bukalemun configuration.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="services"/> or <paramref name="configuration"/> is null.</exception>
+    public static BukalemunBuilder AddBukalemun(this IServiceCollection services, IConfiguration configuration)
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);

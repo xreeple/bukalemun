@@ -2,8 +2,17 @@
 
 namespace Xreeple.Bukalemun.Extensions;
 
+/// <summary>
+/// Extension methods for mapping <see cref="Uncamouflaged"/> objects to strongly typed instances.
+/// </summary>
 public static class UncamouflagedExtensions
 {
+    /// <summary>
+    /// Maps an enumerable of <see cref="Uncamouflaged"/> grouped by their keys to an enumerable of strongly typed objects.
+    /// </summary>
+    /// <typeparam name="T">The target type to map to. Must have a parameterless constructor.</typeparam>
+    /// <param name="uncamouflaged">The enumerable of <see cref="Uncamouflaged"/> instances.</param>
+    /// <returns>An enumerable of mapped <typeparamref name="T"/> instances.</returns>
     public static IEnumerable<T> MapTo<T>(this IEnumerable<Uncamouflaged> uncamouflaged)
         where T : new()
     {
@@ -35,6 +44,12 @@ public static class UncamouflagedExtensions
         }
     }
 
+    /// <summary>
+    /// Maps a single <see cref="Uncamouflaged"/> instance to a strongly typed object.
+    /// </summary>
+    /// <typeparam name="T">The target type to map to. Must have a parameterless constructor.</typeparam>
+    /// <param name="uncamouflaged">The <see cref="Uncamouflaged"/> instance to map.</param>
+    /// <returns>A mapped instance of <typeparamref name="T"/>.</returns>
     public static T MapTo<T>(this Uncamouflaged uncamouflaged)
         where T : new()
     {
