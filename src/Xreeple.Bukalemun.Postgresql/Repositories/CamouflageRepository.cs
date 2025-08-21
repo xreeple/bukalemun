@@ -16,7 +16,6 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
                     "PrimaryKey", 
                     "ColumnName", 
                     "Encrypted", 
-                    "Hashed", 
                     "CreatedAt", 
                     "UpdatedAt"
                 )
@@ -25,14 +24,12 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
                     @PrimaryKey, 
                     @ColumnName, 
                     @Encrypted, 
-                    @Hashed, 
                     @CreatedAt, 
                     @UpdatedAt
                 )
                 ON CONFLICT ("TableName", "PrimaryKey", "ColumnName")
                 DO UPDATE SET
                     "Encrypted" = EXCLUDED."Encrypted",
-                    "Hashed" = EXCLUDED."Hashed",
                     "UpdatedAt" = EXCLUDED."UpdatedAt"
             """;
 

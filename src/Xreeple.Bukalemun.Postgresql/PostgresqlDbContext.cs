@@ -36,7 +36,6 @@ internal class PostgresqlDbContext(string _connectionString, string _schema) : I
                         "PrimaryKey" TEXT NOT NULL,
                         "ColumnName" TEXT NOT NULL,
                         "Encrypted" bytea,
-                        "Hashed" TEXT,
                         "CreatedAt" TIMESTAMP NOT NULL,
                         "UpdatedAt" TIMESTAMP NOT NULL,
                         PRIMARY KEY ("TableName", "PrimaryKey", "ColumnName")
