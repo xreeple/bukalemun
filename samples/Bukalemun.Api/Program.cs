@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Transactions;
+﻿using System.Transactions;
+using Microsoft.AspNetCore.Mvc;
 using Xreeple.Bukalemun.Abstractions;
 using Xreeple.Bukalemun.AspNet.Extensions;
 using Xreeple.Bukalemun.Masking;
@@ -15,33 +15,48 @@ var app = builder.Build();
 
 app.MapGet(
     "/sample-1",
-    ([FromServices] IBukalemun bukalemun) =>
+    async ([FromServices] IBukalemun bukalemun) =>
     {
         using (var scope = new TransactionScope(TransactionScopeOption.Required))
         {
-            bukalemun.Camouflage("Default", "users", "2", "name", "John Doe");
+            await bukalemun.CamouflageAsync("Default", "users", "2", "name", "John Doe");
             scope.Complete();
         }
 
         using (var scope = new TransactionScope(TransactionScopeOption.Required))
         {
-            bukalemun.Camouflage("Default", "users", "2", "email", "john.doe@gmail.com");
+            await bukalemun.CamouflageAsync("Default", "users", "2", "email", "john.doe@gmail.com");
 
             scope.Complete();
         }
 
-        var users = bukalemun.Uncamouflage("Default", "users", ["1", "2"], ["name", "email"]);
-
-        var test1 = bukalemun.Uncamouflage<BukalemunUser>(
+        var users = await bukalemun.UncamouflageAsync(
             "Default",
             "users",
             ["1", "2"],
             ["name", "email"]
         );
 
-        var test3 = bukalemun.Uncamouflage<BukalemunUser>("Default", "users", ["1", "2"], "name");
+        var test1 = await bukalemun.UncamouflageAsync<BukalemunUser>(
+            "Default",
+            "users",
+            ["1", "2"],
+            ["name", "email"]
+        );
 
-        var test4 = bukalemun.Uncamouflage<BukalemunUser>("Default", "users", "2", "name");
+        var test3 = await bukalemun.UncamouflageAsync<BukalemunUser>(
+            "Default",
+            "users",
+            ["1", "2"],
+            "name"
+        );
+
+        var test4 = await bukalemun.UncamouflageAsync<BukalemunUser>(
+            "Default",
+            "users",
+            "2",
+            "name"
+        );
 
         // 1. RevealFirst
         Console.WriteLine(Mask.Build("helloworld").RevealFirst(2).ToString());

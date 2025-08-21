@@ -7,7 +7,7 @@ namespace Xreeple.Bukalemun;
 
 internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukalemun
 {
-    public void Camouflage(
+    public async Task CamouflageAsync(
         string store,
         string tableName,
         string primaryKey,
@@ -15,50 +15,50 @@ internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukale
         string value
     )
     {
-        _camouflageService.Create(store, tableName, primaryKey, columnName, value);
+        await _camouflageService.CreateAsync(store, tableName, primaryKey, columnName, value);
     }
 
-    public Uncamouflaged? Uncamouflage(
+    public async Task<Uncamouflaged?> UncamouflageAsync(
         string store,
         string tableName,
         string primaryKey,
         string columnName
     )
     {
-        return _camouflageService.Get(store, tableName, primaryKey, columnName);
+        return await _camouflageService.GetAsync(store, tableName, primaryKey, columnName);
     }
 
-    public IEnumerable<Uncamouflaged> Uncamouflage(
+    public async Task<IEnumerable<Uncamouflaged>> UncamouflageAsync(
         string store,
         string tableName,
         string[] primaryKeys,
         string columnName
     )
     {
-        return _camouflageService.Get(store, tableName, primaryKeys, columnName);
+        return await _camouflageService.GetAsync(store, tableName, primaryKeys, columnName);
     }
 
-    public IEnumerable<Uncamouflaged> Uncamouflage(
+    public async Task<IEnumerable<Uncamouflaged>> UncamouflageAsync(
         string store,
         string tableName,
         string primaryKey,
         string[] columnNames
     )
     {
-        return _camouflageService.Get(store, tableName, primaryKey, columnNames);
+        return await _camouflageService.GetAsync(store, tableName, primaryKey, columnNames);
     }
 
-    public IEnumerable<Uncamouflaged> Uncamouflage(
+    public async Task<IEnumerable<Uncamouflaged>> UncamouflageAsync(
         string store,
         string tableName,
         string[] primaryKeys,
         string[] columnNames
     )
     {
-        return _camouflageService.Get(store, tableName, primaryKeys, columnNames);
+        return await _camouflageService.GetAsync(store, tableName, primaryKeys, columnNames);
     }
 
-    public IEnumerable<T> Uncamouflage<T>(
+    public async Task<IEnumerable<T>> UncamouflageAsync<T>(
         string store,
         string tableName,
         string[] primaryKeys,
@@ -66,10 +66,10 @@ internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukale
     )
         where T : new()
     {
-        return Uncamouflage(store, tableName, primaryKeys, columnNames).MapTo<T>();
+        return (await UncamouflageAsync(store, tableName, primaryKeys, columnNames)).MapTo<T>();
     }
 
-    public IEnumerable<T> Uncamouflage<T>(
+    public async Task<IEnumerable<T>> UncamouflageAsync<T>(
         string store,
         string tableName,
         string primaryKey,
@@ -77,10 +77,10 @@ internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukale
     )
         where T : new()
     {
-        return Uncamouflage(store, tableName, primaryKey, columnNames).MapTo<T>();
+        return (await UncamouflageAsync(store, tableName, primaryKey, columnNames)).MapTo<T>();
     }
 
-    public IEnumerable<T> Uncamouflage<T>(
+    public async Task<IEnumerable<T>> UncamouflageAsync<T>(
         string store,
         string tableName,
         string[] primaryKeys,
@@ -88,13 +88,18 @@ internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukale
     )
         where T : new()
     {
-        return Uncamouflage(store, tableName, primaryKeys, columnName).MapTo<T>();
+        return (await UncamouflageAsync(store, tableName, primaryKeys, columnName)).MapTo<T>();
     }
 
-    public T Uncamouflage<T>(string store, string tableName, string primaryKey, string columnName)
+    public async Task<T> UncamouflageAsync<T>(
+        string store,
+        string tableName,
+        string primaryKey,
+        string columnName
+    )
         where T : new()
     {
-        var uncamouflaged = Uncamouflage(store, tableName, primaryKey, columnName);
+        var uncamouflaged = await UncamouflageAsync(store, tableName, primaryKey, columnName);
 
         if (uncamouflaged is null)
         {

@@ -4,21 +4,26 @@ namespace Xreeple.Bukalemun.Data.Abstractions;
 
 internal interface ICamouflageRepository
 {
-    bool Upsert(Camouflaged camouflaged);
-    Camouflaged? Get(string store, string tableName, string primaryKey, string columnName);
-    IEnumerable<Camouflaged> Get(
+    Task<bool> UpsertAsync(Camouflaged camouflaged);
+    Task<Camouflaged?> GetAsync(
+        string store,
+        string tableName,
+        string primaryKey,
+        string columnName
+    );
+    Task<IEnumerable<Camouflaged>> GetAsync(
         string store,
         string tableName,
         string[] primaryKeys,
         string columnName
     );
-    IEnumerable<Camouflaged> Get(
+    Task<IEnumerable<Camouflaged>> GetAsync(
         string store,
         string tableName,
         string primaryKey,
         string[] columnNames
     );
-    IEnumerable<Camouflaged> Get(
+    Task<IEnumerable<Camouflaged>> GetAsync(
         string store,
         string tableName,
         string[] primaryKeys,

@@ -13,7 +13,7 @@ internal sealed class CamouflageService(
     ICryptoProvider _cryptoProvider
 ) : ICamouflageService
 {
-    public void Create(
+    public async Task CreateAsync(
         string store,
         string tableName,
         string primaryKey,
@@ -24,7 +24,7 @@ internal sealed class CamouflageService(
         var encryptKey = _bukalemunOptions.Value.Stores[store].EncryptKey;
         var encrypted = _cryptoProvider.Encrypt(encryptKey, value);
 
-        _camouflageRepository.Upsert(
+        await _camouflageRepository.UpsertAsync(
             new Data.Entites.Camouflaged()
             {
                 Store = store,
@@ -35,39 +35,50 @@ internal sealed class CamouflageService(
             }
         );
     }
-    public Uncamouflaged? Get(string store, string tableName, string primaryKey, string columnName)
+
+    public async Task<Uncamouflaged?> GetAsync(
+        string store,
+        string tableName,
+        string primaryKey,
+        string columnName
+    )
     {
-        return Get(store, tableName, [primaryKey], [columnName]).FirstOrDefault();
+        return (await GetAsync(store, tableName, [primaryKey], [columnName])).FirstOrDefault();
     }
 
-    public IEnumerable<Uncamouflaged> Get(
+    public async Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
         string tableName,
         string[] primaryKeys,
         string columnName
     )
     {
-        return Get(store, tableName, primaryKeys, [columnName]);
+        return await GetAsync(store, tableName, primaryKeys, [columnName]);
     }
 
-    public IEnumerable<Uncamouflaged> Get(
+    public async Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
         string tableName,
         string primaryKey,
         string[] columnNames
     )
     {
-        return Get(store, tableName, [primaryKey], columnNames);
+        return await GetAsync(store, tableName, [primaryKey], columnNames);
     }
 
-    public IEnumerable<Uncamouflaged> Get(
+    public async Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
         string tableName,
         string[] primaryKeys,
         string[] columnNames
     )
     {
-        var camouflaged = _camouflageRepository.Get(store, tableName, primaryKeys, columnNames);
+        var camouflaged = await _camouflageRepository.GetAsync(
+            store,
+            tableName,
+            primaryKeys,
+            columnNames
+        );
 
         var result = camouflaged.Select(m => new Uncamouflaged()
         {

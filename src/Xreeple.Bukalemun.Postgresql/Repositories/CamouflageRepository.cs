@@ -6,7 +6,7 @@ namespace Xreeple.Bukalemun.Postgresql.Repositories;
 
 internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageRepository
 {
-    public bool Upsert(Camouflaged camouflaged)
+    public async Task<bool> UpsertAsync(Camouflaged camouflaged)
     {
         using var connection = _dbContext.CreateConnection();
 
@@ -36,35 +36,40 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
                     "UpdatedAt" = EXCLUDED."UpdatedAt"
             """;
 
-        return connection.Execute(sql, camouflaged) == 1;
+        return await connection.ExecuteAsync(sql, camouflaged) == 1;
     }
 
-    public Camouflaged? Get(string store, string tableName, string primaryKey, string columnName)
+    public async Task<Camouflaged?> GetAsync(
+        string store,
+        string tableName,
+        string primaryKey,
+        string columnName
+    )
     {
-        return Get(store, tableName, [primaryKey], [columnName]).FirstOrDefault();
+        return (await GetAsync(store, tableName, [primaryKey], [columnName])).FirstOrDefault();
     }
 
-    public IEnumerable<Camouflaged> Get(
+    public async Task<IEnumerable<Camouflaged>> GetAsync(
         string store,
         string tableName,
         string[] primaryKeys,
         string columnName
     )
     {
-        return Get(store, tableName, primaryKeys, [columnName]);
+        return await GetAsync(store, tableName, primaryKeys, [columnName]);
     }
 
-    public IEnumerable<Camouflaged> Get(
+    public async Task<IEnumerable<Camouflaged>> GetAsync(
         string store,
         string tableName,
         string primaryKey,
         string[] columnNames
     )
     {
-        return Get(store, tableName, [primaryKey], columnNames);
+        return await GetAsync(store, tableName, [primaryKey], columnNames);
     }
 
-    public IEnumerable<Camouflaged> Get(
+    public async Task<IEnumerable<Camouflaged>> GetAsync(
         string store,
         string tableName,
         string[] primaryKeys,
@@ -86,7 +91,7 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
                 AND "ColumnName" = ANY(@ColumnNames)
             """;
 
-        return connection.Query<Camouflaged>(
+        return await connection.QueryAsync<Camouflaged>(
             sql,
             new
             {
