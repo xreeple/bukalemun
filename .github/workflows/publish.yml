@@ -1,0 +1,43 @@
+name: NuGet Package Publish
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '**/*.nuspec'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - '**/*.nuspec'
+      
+jobs:
+  build-and-publish:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Publish project
+        run: dotnet publish src/Xreeple.Bukalemun/Xreeple.Bukalemun.csproj --configuration Release --output ./publish/net9.0 --framework net9.0
+
+      - name: Pack NuGet package
+        run: nuget pack Xreeple.Bukalemun.nuspec
+
+      - name: Setup NuGet CLI
+        uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: '5.x'
+
+      - name: Push NuGet package
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: nuget push *.nupkg -src https://api.nuget.org/v3/index.json ${{secrets.NUGET_API_KEY}}
