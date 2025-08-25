@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Xreeple.Bukalemun.AspNet\Xreeple.Bukalemun.AspNet.csproj" />
+    <ProjectReference Include="..\Xreeple.Bukalemun.AspNet\Xreeple.Bukalemun.DependencyInjectionExtensions.csproj" />
     <ProjectReference Include="..\Xreeple.Bukalemun.Data\Xreeple.Bukalemun.Data.csproj" />
   </ItemGroup>
 

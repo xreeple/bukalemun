@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Xreeple.Bukalemun.AspNet;
 using Xreeple.Bukalemun.Data.Abstractions;
+using Xreeple.Bukalemun.DependencyInjectionExtensions;
 using Xreeple.Bukalemun.Postgresql.Repositories;
 
 namespace Xreeple.Bukalemun.Postgresql;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Xreeple.Bukalemun.AspNet;
+namespace Xreeple.Bukalemun.DependencyInjectionExtensions;
 
 public class BukalemunBuilder(IServiceCollection services, IConfiguration configuration)
 {

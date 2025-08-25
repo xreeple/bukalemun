@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Xreeple.Bukalemun.AspNet\Xreeple.Bukalemun.AspNet.csproj" />
+    <ProjectReference Include="..\..\src\Xreeple.Bukalemun.AspNet\Xreeple.Bukalemun.DependencyInjectionExtensions.csproj" />
     <ProjectReference Include="..\..\src\Xreeple.Bukalemun.Masking\Xreeple.Bukalemun.Masking.csproj" />
     <ProjectReference Include="..\..\src\Xreeple.Bukalemun.Postgresql\Xreeple.Bukalemun.Postgresql.csproj" />
     <ProjectReference Include="..\..\src\Xreeple.Bukalemun\Xreeple.Bukalemun.csproj" />

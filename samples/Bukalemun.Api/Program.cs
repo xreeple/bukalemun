@@ -1,7 +1,7 @@
 ﻿using System.Transactions;
 using Microsoft.AspNetCore.Mvc;
 using Xreeple.Bukalemun.Abstractions;
-using Xreeple.Bukalemun.AspNet.Extensions;
+using Xreeple.Bukalemun.DependencyInjectionExtensions.Extensions;
 using Xreeple.Bukalemun.Masking;
 using Xreeple.Bukalemun.Postgresql;
 

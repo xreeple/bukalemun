@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Data", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Postgresql", "src\Xreeple.Bukalemun.Postgresql\Xreeple.Bukalemun.Postgresql.csproj", "{0DDBBA77-4448-4F22-B8CE-A15EF4A8239B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.AspNet", "src\Xreeple.Bukalemun.AspNet\Xreeple.Bukalemun.AspNet.csproj", "{CA91BA56-FCE3-4093-AB77-7EF93BD3D143}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.DependencyInjectionExtensions", "src\Xreeple.Bukalemun.AspNet\Xreeple.Bukalemun.DependencyInjectionExtensions.csproj", "{CA91BA56-FCE3-4093-AB77-7EF93BD3D143}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Services", "src\Xreeple.Bukalemun.Services\Xreeple.Bukalemun.Services.csproj", "{113DFB36-D9FF-433D-AB89-AECE85FC1B3D}"
 EndProject

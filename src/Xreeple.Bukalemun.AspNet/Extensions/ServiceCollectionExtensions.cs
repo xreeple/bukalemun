@@ -1,13 +1,14 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xreeple.Bukalemun.Abstractions;
+using Xreeple.Bukalemun.DependencyInjectionExtensions;
 using Xreeple.Bukalemun.Providers;
 using Xreeple.Bukalemun.Providers.Abstractions;
 using Xreeple.Bukalemun.Services;
 using Xreeple.Bukalemun.Services.Abstractions;
 using Xreeple.Bukalemun.Services.Options;
 
-namespace Xreeple.Bukalemun.AspNet.Extensions;
+namespace Xreeple.Bukalemun.DependencyInjectionExtensions.Extensions;
 
 public static class ServiceCollectionExtensions
 {
