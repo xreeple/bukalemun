@@ -17,13 +17,13 @@ app.MapGet(
     "/sample-1",
     async ([FromServices] IBukalemun bukalemun) =>
     {
-        using (var scope = new TransactionScope(TransactionScopeOption.Required))
+        using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
             await bukalemun.CamouflageAsync("Default", "users", "2", "name", "John Doe");
             scope.Complete();
         }
 
-        using (var scope = new TransactionScope(TransactionScopeOption.Required))
+        using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
             await bukalemun.CamouflageAsync("Default", "users", "2", "email", "john.doe@gmail.com");
 
