@@ -27,7 +27,7 @@ jobs:
         run: dotnet restore src/Xreeple.Bukalemun.DependencyInjectionExtensions/Xreeple.Bukalemun.DependencyInjectionExtensions.csproj
 
       - name: Publish project
-        run: dotnet publish src/Xreeple.Bukalemun.DependencyInjectionExtensions/Xreeple.Bukalemun.DependencyInjectionExtensions.csproj --configuration Release --output publish/Xreeple.Bukalemun.DependencyInjectionExtensions/net9.0 --framework net9.0
+        run: dotnet publish src/Xreeple.Bukalemun.DependencyInjectionExtensions/Xreeple.Bukalemun.DependencyInjectionExtensions.csproj --configuration Release --output src/Xreeple.Bukalemun.DependencyInjectionExtensions/publish/Xreeple.Bukalemun.DependencyInjectionExtensions/net9.0 --framework net9.0
 
       - name: Pack NuGet package
         run: nuget pack src/Xreeple.Bukalemun.DependencyInjectionExtensions/Xreeple.Bukalemun.DependencyInjectionExtensions.nuspec
