@@ -1,14 +1,14 @@
-name: NuGet Package Publish
+name: NuGet Package Publish - Xreeple.Bukalemun.Data
 
 on:
   push:
     branches: [ "main" ]
     paths:
-      - '**/*.nuspec'
+      - '**/Xreeple.Bukalemun.Data.nuspec'
   pull_request:
     branches: [ "main" ]
     paths:
-      - '**/*.nuspec'
+      - '**/Xreeple.Bukalemun.Data.nuspec'
       
 jobs:
   build-and-publish:
@@ -24,13 +24,13 @@ jobs:
           dotnet-version: '9.x'
 
       - name: Restore dependencies
-        run: dotnet restore src/Xreeple.Bukalemun/Xreeple.Bukalemun.csproj
+        run: dotnet restore src/Xreeple.Bukalemun.Data/Xreeple.Bukalemun.Data.csproj
 
       - name: Publish project
-        run: dotnet publish src/Xreeple.Bukalemun/Xreeple.Bukalemun.csproj --configuration Release --output ./publish/net9.0 --framework net9.0
+        run: dotnet publish src/Xreeple.Bukalemun.Data/Xreeple.Bukalemun.Data.csproj --configuration Release --output ./publish/Xreeple.Bukalemun.Data/net9.0 --framework net9.0
 
       - name: Pack NuGet package
-        run: nuget pack Xreeple.Bukalemun.nuspec
+        run: nuget pack src/Xreeple.Bukalemun.Data/Xreeple.Bukalemun.Data.nuspec
 
       - name: Setup NuGet CLI
         uses: nuget/setup-nuget@v1

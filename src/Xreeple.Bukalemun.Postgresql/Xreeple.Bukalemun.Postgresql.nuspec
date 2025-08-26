@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+	<metadata>
+		<id>Xreeple.Bukalemun.Postgresql</id>
+		<title>Xreeple.Bukalemun.Postgresql</title>
+		<version>1.0.0-alpha.2508.1</version>
+		<authors>Xreeple</authors>
+		<license type="expression">MIT</license>
+		<projectUrl>https://github.com/xreeple</projectUrl>
+		<repository type="git" url="https://github.com/xreeple/bukalemun.git" />
+		<description>Bukalemun is a flexible and Secure Data Encryption Library for .NET Bukalemun is a lightweight and flexible encryption library for .NET applications, designed to securely store sensitive and personal data in databases.</description>
+		<releaseNotes>Initial release.</releaseNotes>
+		<copyright>Copyright © 2025 Xreeple</copyright>
+		<tags>secure data encryption sensitive personal dotnet</tags>
+		<readme>README.md</readme>
+		<icon>chameleon.png</icon>
+		<dependencies>
+			<dependency id="Dapper" version="2.1.66" />
+			<dependency id="Npgsql" version="9.0.3" />
+			<dependency id="Xreeple.Bukalemun.Data" version="1.0.0-alpha.2508.2" />
+			<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.0-alpha.2508.1" />
+		</dependencies>
+	</metadata>
+
+	<files>
+		<file src="publish\net9.0\Xreeple.Bukalemun.Postgresql.dll" target="lib\net9.0" />
+		<file src="publish\net9.0\Xreeple.Bukalemun.Postgresql.pdb" target="lib\net9.0" />
+		<file src="LICENSE" />
+		<file src="chameleon.png" />
+	</files>
+</package>
