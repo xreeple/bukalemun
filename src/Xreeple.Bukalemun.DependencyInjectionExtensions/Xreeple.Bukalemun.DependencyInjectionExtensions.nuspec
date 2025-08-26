@@ -12,7 +12,6 @@
 		<releaseNotes>Initial release.</releaseNotes>
 		<copyright>Copyright © 2025 Xreeple</copyright>
 		<tags>secure data encryption sensitive personal dotnet</tags>
-		<readme>README.md</readme>
 		<icon>chameleon.png</icon>
 		<dependencies>
 			<dependency id="Xreeple.Bukalemun" version="1.0.0-alpha.2508.2" />
