@@ -1,5 +1,13 @@
 # Bukalemun
 
+[![Xreeple.Bukalemun on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun?label=Xreeple.Bukalemun)](https://www.nuget.org/packages/Xreeple.Bukalemun/) 
+[![Xreeple.Bukalemun.Data on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun.Data?label=Xreeple.Bukalemun.Data)](https://www.nuget.org/packages/Xreeple.Bukalemun.Data/)
+[![Xreeple.Bukalemun.Postgresql on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun.Postgresql?label=Xreeple.Bukalemun.Postgresql)](https://www.nuget.org/packages/Xreeple.Bukalemun.Postgresql/)
+[![Xreeple.Bukalemun.Providers on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun.Providers?label=Xreeple.Bukalemun.Providers)](https://www.nuget.org/packages/Xreeple.Bukalemun.Providers/)
+[![Xreeple.Bukalemun.Services on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun.Services?label=Xreeple.Bukalemun.Services)](https://www.nuget.org/packages/Xreeple.Bukalemun.Services/)
+[![Xreeple.Bukalemun.DependencyInjectionExtensions on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun.DependencyInjectionExtensions?label=Xreeple.Bukalemun.DependencyInjectionExtensions)](https://www.nuget.org/packages/Xreeple.Bukalemun.DependencyInjectionExtensions/)
+[![Xreeple.Bukalemun.Masking on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun.Masking?label=Xreeple.Bukalemun.Masking)](https://www.nuget.org/packages/Xreeple.Bukalemun.Masking/)
+
 ![Bukalemun](/chameleon.png)
 
 Bukalemun 🦎 – Flexible and Secure Data Encryption Library for .NET
