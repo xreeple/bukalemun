@@ -125,6 +125,14 @@ app.MapGet(
                 .ToString()
         );
 
+        Console.WriteLine(
+            Mask.Build("mehmet emin eker")
+                .RevealInitialsPerWord()
+                .RemoveMasked()
+                .ToString()
+        );
+        // mee
+
         return test4;
     }
 );

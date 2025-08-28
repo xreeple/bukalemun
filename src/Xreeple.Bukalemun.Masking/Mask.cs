@@ -14,6 +14,7 @@ public sealed class Mask
     private readonly HashSet<char> _preserve;
     private char _maskChar = '*';
     private int? _compactStarCount = null;
+    private bool _removeMasked = false;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Mask"/> class with the specified input string.
@@ -55,6 +56,17 @@ public sealed class Mask
         if (starCount > 0)
             _compactStarCount = starCount;
 
+        return this;
+    }
+
+    /// <summary>
+    /// Configures whether the mask should be removed and returns the current instance.
+    /// </summary>
+    /// <param name="remove">A value indicating whether the mask should be removed. The default is <see langword="true"/>.</param>
+    /// <returns>The current instance of the <see cref="Mask"/> class, allowing for method chaining.</returns>
+    public Mask RemoveMasked(bool remove = true)
+    {
+        _removeMasked = remove;
         return this;
     }
 
@@ -194,7 +206,17 @@ public sealed class Mask
         if (_input.Length == 0)
             return string.Empty;
 
-        if (_compactStarCount.HasValue)
+        if (_removeMasked)
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < _input.Length; i++)
+            {
+                if (_reveal[i])
+                    sb.Append(_input[i]);
+            }
+            return sb.ToString();
+        }
+        else if (_compactStarCount.HasValue)
         {
             var sb = new StringBuilder();
             int i = 0;
