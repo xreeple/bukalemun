@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Xreeple.Bukalemun.Services</id>
 		<title>Xreeple.Bukalemun.Services</title>
-		<version>1.0.0-alpha.2508.2</version>
+		<version>1.0.0-alpha.2508.3</version>
 		<authors>Xreeple</authors>
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/xreeple</projectUrl>
@@ -15,8 +15,8 @@
 		<icon>chameleon.png</icon>
 		<dependencies>
 			<dependency id="Microsoft.Extensions.Options" version="9.0.7" />
-			<dependency id="Xreeple.Bukalemun.Data" version="1.0.0-alpha.2508.2" />
-			<dependency id="Xreeple.Bukalemun.Providers" version="1.0.0-alpha.2508.2" />
+			<dependency id="Xreeple.Bukalemun.Data" version="1.0.0-alpha.2508.3" />
+			<dependency id="Xreeple.Bukalemun.Providers" version="1.0.0-alpha.2508.3" />
 		</dependencies>
 	</metadata>
 

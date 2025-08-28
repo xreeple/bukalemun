@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Xreeple.Bukalemun.Postgresql</id>
 		<title>Xreeple.Bukalemun.Postgresql</title>
-		<version>1.0.0-alpha.2508.2</version>
+		<version>1.0.0-alpha.2508.3</version>
 		<authors>Xreeple</authors>
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/xreeple</projectUrl>
@@ -16,8 +16,8 @@
 		<dependencies>
 			<dependency id="Dapper" version="2.1.66" />
 			<dependency id="Npgsql" version="9.0.3" />
-			<dependency id="Xreeple.Bukalemun.Data" version="1.0.0-alpha.2508.2" />
-			<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.0-alpha.2508.2" />
+			<dependency id="Xreeple.Bukalemun.Data" version="1.0.0-alpha.2508.3" />
+			<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.0-alpha.2508.3" />
 		</dependencies>
 	</metadata>
 
