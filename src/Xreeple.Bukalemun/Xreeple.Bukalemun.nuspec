@@ -14,7 +14,7 @@
 		<tags>secure data encryption sensitive personal dotnet</tags>
 		<icon>chameleon.png</icon>
 		<dependencies>
-			<dependency id="Xreeple.Bukalemun.Services" version="1.0.0-alpha.2508.1" />
+			<dependency id="Xreeple.Bukalemun.Services" version="1.0.0-alpha.2508.2" />
 		</dependencies>
 	</metadata>
 	

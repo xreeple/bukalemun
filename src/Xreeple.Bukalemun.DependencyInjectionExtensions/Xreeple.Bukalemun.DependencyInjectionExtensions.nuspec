@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Xreeple.Bukalemun.DependencyInjectionExtensions</id>
 		<title>Xreeple.Bukalemun.DependencyInjectionExtensions</title>
-		<version>1.0.0-alpha.2508.1</version>
+		<version>1.0.0-alpha.2508.2</version>
 		<authors>Xreeple</authors>
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/xreeple</projectUrl>
@@ -15,8 +15,8 @@
 		<icon>chameleon.png</icon>
 		<dependencies>
 			<dependency id="Xreeple.Bukalemun" version="1.0.0-alpha.2508.2" />
-			<dependency id="Xreeple.Bukalemun.Providers" version="1.0.0-alpha.2508.1" />
-			<dependency id="Xreeple.Bukalemun.Services" version="1.0.0-alpha.2508.1" />
+			<dependency id="Xreeple.Bukalemun.Providers" version="1.0.0-alpha.2508.2" />
+			<dependency id="Xreeple.Bukalemun.Services" version="1.0.0-alpha.2508.2" />
 		</dependencies>
 	</metadata>
 
