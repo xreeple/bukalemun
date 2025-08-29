@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Xreeple.Bukalemun.Masking</id>
 		<title>Xreeple.Bukalemun.Masking</title>
-		<version>1.0.0-alpha.2508.4</version>
+		<version>1.0.0-alpha.2508.5</version>
 		<authors>Xreeple</authors>
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/xreeple</projectUrl>
@@ -13,6 +13,7 @@
 		<copyright>Copyright © 2025 Xreeple</copyright>
 		<tags>secure data encryption sensitive personal dotnet</tags>
 		<icon>chameleon.png</icon>
+		<readme>README.md</readme>
 	</metadata>
 
 	<files>
@@ -20,5 +21,6 @@
 		<file src="publish\net9.0\Xreeple.Bukalemun.Masking.pdb" target="lib\net9.0" />
 		<file src="LICENSE" />
 		<file src="chameleon.png" />
+		<file src="README.md" />
 	</files>
 </package>
