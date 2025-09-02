@@ -24,6 +24,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun", "src\Xr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Masking", "src\Xreeple.Bukalemun.Masking\Xreeple.Bukalemun.Masking.csproj", "{808C9F72-113E-4656-9167-B75A7E3295DD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Providers.Tests", "tests\Xreeple.Bukalemun.Providers.Tests\Xreeple.Bukalemun.Providers.Tests.csproj", "{3474E904-58FE-40CA-8898-62872CE1AA66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +70,10 @@ Global
 		{808C9F72-113E-4656-9167-B75A7E3295DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{808C9F72-113E-4656-9167-B75A7E3295DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{808C9F72-113E-4656-9167-B75A7E3295DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3474E904-58FE-40CA-8898-62872CE1AA66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3474E904-58FE-40CA-8898-62872CE1AA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3474E904-58FE-40CA-8898-62872CE1AA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3474E904-58FE-40CA-8898-62872CE1AA66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +87,7 @@ Global
 		{4591C69F-AEFD-4A80-8A86-F54E222512B5} = {2D53659D-B330-41B7-8D8D-1478AD942B7D}
 		{85BEA97B-1890-4C63-8F7B-D894BB303DC5} = {E580BFFE-A50A-46DA-9042-05EE0AFB98AA}
 		{808C9F72-113E-4656-9167-B75A7E3295DD} = {E580BFFE-A50A-46DA-9042-05EE0AFB98AA}
+		{3474E904-58FE-40CA-8898-62872CE1AA66} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F5343AC1-1BE6-4B1E-9F36-336B32C349C1}

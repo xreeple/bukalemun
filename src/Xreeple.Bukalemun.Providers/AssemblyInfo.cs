@@ -2,3 +2,4 @@
 
 [assembly: InternalsVisibleTo("Xreeple.Bukalemun.DependencyInjectionExtensions")]
 [assembly: InternalsVisibleTo("Xreeple.Bukalemun.Services")]
+[assembly: InternalsVisibleTo("Xreeple.Bukalemun.Providers.Tests")]
