@@ -1,5 +1,6 @@
 # Bukalemun
 
+![Tests](https://github.com/xreeple/bukalemun/actions/workflows/dotnet-tests.yml/badge.svg)
 [![Xreeple.Bukalemun on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun?label=Xreeple.Bukalemun)](https://www.nuget.org/packages/Xreeple.Bukalemun/) 
 [![Xreeple.Bukalemun.Data on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun.Data?label=Xreeple.Bukalemun.Data)](https://www.nuget.org/packages/Xreeple.Bukalemun.Data/)
 [![Xreeple.Bukalemun.Postgresql on NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun.Postgresql?label=Xreeple.Bukalemun.Postgresql)](https://www.nuget.org/packages/Xreeple.Bukalemun.Postgresql/)
