@@ -8,7 +8,7 @@ Bukalemun is a lightweight and flexible encryption library for .NET applications
 It was built to enhance data privacy and help comply with regulations such as GDPR and KVKK. With real-time encryption/decryption operations, it offers an ideal balance between performance and security.
 
 ## Packages
-| Package | Stable | Preview | Downloads |
+| Package | Release | Preview | Downloads |
 |---------|--------|---------|-----------|
 |Xreeple.Bukalemun|![NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun)|![NuGet](https://img.shields.io/nuget/vpre/Xreeple.Bukalemun)|![NuGet](https://img.shields.io/nuget/dt/Xreeple.Bukalemun)|
 |Xreeple.Bukalemun.Data|![NuGet](https://img.shields.io/nuget/v/Xreeple.Bukalemun.Data)|![NuGet](https://img.shields.io/nuget/vpre/Xreeple.Bukalemun.Data)|![NuGet](https://img.shields.io/nuget/dt/Xreeple.Bukalemun.Data)|
