@@ -46,6 +46,7 @@ namespace Xreeple.Bukalemun.Services.Tests
         [Test]
         public async Task CreateAsync_ShouldCallRepositoryWithEncryptedValue()
         {
+            // Arrange
             string store = "store1";
             string table = "table1";
             string key = "key1";
@@ -60,8 +61,10 @@ namespace Xreeple.Bukalemun.Services.Tests
                 .Setup(r => r.UpsertAsync(It.IsAny<CamouflagedEntity>()))
                 .ReturnsAsync(true);
 
+            // Act
             await _camouflageService!.CreateAsync(store, table, key, column, value);
 
+            // Assert
             _camouflageRepoMock.Verify(
                 r =>
                     r.UpsertAsync(
@@ -81,6 +84,7 @@ namespace Xreeple.Bukalemun.Services.Tests
         [Test]
         public async Task GetAsync_SingleKey_SingleColumn_ShouldReturnValidResult()
         {
+            // Arrange
             string store = "store1";
             string table = "table1";
             string key = "key1";
@@ -112,8 +116,10 @@ namespace Xreeple.Bukalemun.Services.Tests
                 .Setup(c => c.Decrypt(storeKey, It.IsAny<byte[]>()))
                 .Returns(expectedDecryptedValue);
 
+            // Act
             var result = await _camouflageService!.GetAsync(store, table, key, column);
 
+            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(key, result!.Key);
             Assert.AreEqual(column, result.Name);
@@ -123,6 +129,7 @@ namespace Xreeple.Bukalemun.Services.Tests
         [Test]
         public async Task GetAsync_MultipleKeys_SingleColumn_ShouldReturnMultipleResults()
         {
+            // Arrange
             string store = "store1";
             string table = "table1";
             string[] keys = ["key1", "key2"];
@@ -160,8 +167,10 @@ namespace Xreeple.Bukalemun.Services.Tests
                 .Setup(c => c.Decrypt(It.IsAny<string>(), It.IsAny<byte[]>()))
                 .Returns("decrypted");
 
+            // Act
             var results = await _camouflageService!.GetAsync(store, table, keys, column);
 
+            // Assert
             Assert.AreEqual(2, results.Count());
             Assert.IsTrue(results.All(r => r.Name == column));
         }
@@ -169,6 +178,7 @@ namespace Xreeple.Bukalemun.Services.Tests
         [Test]
         public async Task GetAsync_SingleKey_MultipleColumns_ShouldReturnMultipleResults()
         {
+            // Arrange
             string store = "store1";
             string table = "table1";
             string key = "key1";
@@ -206,8 +216,10 @@ namespace Xreeple.Bukalemun.Services.Tests
                 .Setup(c => c.Decrypt(It.IsAny<string>(), It.IsAny<byte[]>()))
                 .Returns("decrypted");
 
+            // Act
             var results = await _camouflageService!.GetAsync(store, table, key, columns);
 
+            // Assert
             Assert.AreEqual(2, results.Count());
             Assert.IsTrue(results.All(r => r.Key == key));
         }
@@ -215,6 +227,7 @@ namespace Xreeple.Bukalemun.Services.Tests
         [Test]
         public async Task GetAsync_WithNullEncrypted_ShouldReturnNullValue()
         {
+            // Arrange
             string store = "store1";
             string table = "table1";
             string[] keys = ["key1"];
@@ -233,9 +246,11 @@ namespace Xreeple.Bukalemun.Services.Tests
                 .Setup(r => r.GetAsync(store, table, It.IsAny<string[]>(), It.IsAny<string[]>()))
                 .ReturnsAsync([camouflaged]);
 
+            // Act
             var results = await _camouflageService!.GetAsync(store, table, keys, columns);
             var result = results.First();
 
+            // Assert
             Assert.IsNotNull(result);
             Assert.IsNull(result.Value);
             _cryptoProviderMock!.Verify(
