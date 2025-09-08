@@ -3,3 +3,5 @@
 [assembly: InternalsVisibleTo("Xreeple.Bukalemun.DependencyInjectionExtensions")]
 [assembly: InternalsVisibleTo("Xreeple.Bukalemun.Services")]
 [assembly: InternalsVisibleTo("Xreeple.Bukalemun.Providers.Tests")]
+[assembly: InternalsVisibleTo("Xreeple.Bukalemun.Services.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

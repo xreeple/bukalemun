@@ -2,3 +2,5 @@
 
 [assembly: InternalsVisibleTo("Xreeple.Bukalemun.Postgresql")]
 [assembly: InternalsVisibleTo("Xreeple.Bukalemun.Services")]
+[assembly: InternalsVisibleTo("Xreeple.Bukalemun.Services.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
