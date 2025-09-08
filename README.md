@@ -26,7 +26,7 @@ It was built to enhance data privacy and help comply with regulations such as GD
 - Minimal integration via attribute-based usage
 - Extendable key management system
 
-## 📦 Target Use Cases
+## 🎯 Target Use Cases
 
 - Encrypting personal data (e.g., name, national ID, phone number, email, etc.)
 - Enhancing data security at the application layer
