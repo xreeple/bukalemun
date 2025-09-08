@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{02EA681E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Providers.Tests", "tests\Xreeple.Bukalemun.Providers.Tests\Xreeple.Bukalemun.Providers.Tests.csproj", "{3474E904-58FE-40CA-8898-62872CE1AA66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Services.Tests", "src\Xreeple.Bukalemun.Services.Tests1\Xreeple.Bukalemun.Services.Tests.csproj", "{BF64186C-667E-4336-88E2-30953AF12548}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xreeple.Bukalemun.Services.Tests", "tests\Xreeple.Bukalemun.Services.Tests\Xreeple.Bukalemun.Services.Tests.csproj", "{BF64186C-667E-4336-88E2-30953AF12548}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
