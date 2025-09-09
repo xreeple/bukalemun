@@ -80,8 +80,7 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
                     "TableName", 
                     "PrimaryKey", 
                     "ColumnName", 
-                    "Encrypted", 
-                    "Hashed"
+                    "Encrypted"
                 FROM "{store}"
                 WHERE "TableName" = @TableName
                 AND "PrimaryKey" = ANY(@PrimaryKeys)
