@@ -14,7 +14,7 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
                 INSERT INTO "{camouflaged.Store}" (
                     "Table", 
                     "PrimaryKey", 
-                    "ColumnName", 
+                    "Column", 
                     "Encrypted", 
                     "CreatedAt", 
                     "UpdatedAt"
@@ -22,12 +22,12 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
                 VALUES (
                     @Table, 
                     @PrimaryKey, 
-                    @ColumnName, 
+                    @Column, 
                     @Encrypted, 
                     @CreatedAt, 
                     @UpdatedAt
                 )
-                ON CONFLICT ("Table", "PrimaryKey", "ColumnName")
+                ON CONFLICT ("Table", "PrimaryKey", "Column")
                 DO UPDATE SET
                     "Encrypted" = EXCLUDED."Encrypted",
                     "UpdatedAt" = EXCLUDED."UpdatedAt"
@@ -40,37 +40,37 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
         string store,
         string table,
         string primaryKey,
-        string columnName
+        string column
     )
     {
-        return (await GetAsync(store, table, [primaryKey], [columnName])).FirstOrDefault();
+        return (await GetAsync(store, table, [primaryKey], [column])).FirstOrDefault();
     }
 
     public async Task<IEnumerable<Camouflaged>> GetAsync(
         string store,
         string table,
         string[] primaryKeys,
-        string columnName
+        string column
     )
     {
-        return await GetAsync(store, table, primaryKeys, [columnName]);
+        return await GetAsync(store, table, primaryKeys, [column]);
     }
 
     public async Task<IEnumerable<Camouflaged>> GetAsync(
         string store,
         string table,
         string primaryKey,
-        string[] columnNames
+        string[] columns
     )
     {
-        return await GetAsync(store, table, [primaryKey], columnNames);
+        return await GetAsync(store, table, [primaryKey], columns);
     }
 
     public async Task<IEnumerable<Camouflaged>> GetAsync(
         string store,
         string table,
         string[] primaryKeys,
-        string[] columnNames
+        string[] columns
     )
     {
         using var connection = _dbContext.CreateConnection();
@@ -79,12 +79,12 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
                 SELECT 
                     "Table", 
                     "PrimaryKey", 
-                    "ColumnName", 
+                    "Column", 
                     "Encrypted"
                 FROM "{store}"
                 WHERE "Table" = @Table
                 AND "PrimaryKey" = ANY(@PrimaryKeys)
-                AND "ColumnName" = ANY(@ColumnNames)
+                AND "Column" = ANY(@Columns)
             """;
 
         return await connection.QueryAsync<Camouflaged>(
@@ -93,7 +93,7 @@ internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageReposito
             {
                 Table = table,
                 PrimaryKeys = primaryKeys,
-                ColumnNames = columnNames,
+                Columns = columns,
             }
         );
     }

@@ -72,7 +72,7 @@ namespace Xreeple.Bukalemun.Services.Tests
                             c.Store == store
                             && c.Table == table
                             && c.PrimaryKey == key
-                            && c.ColumnName == column
+                            && c.Column == column
                             && c.Encrypted != null
                             && c.Encrypted.SequenceEqual(encryptedValue)
                         )
@@ -96,7 +96,7 @@ namespace Xreeple.Bukalemun.Services.Tests
                 Store = store,
                 Table = table,
                 PrimaryKey = key,
-                ColumnName = column,
+                Column = column,
                 Encrypted = [1, 2, 3],
             };
 
@@ -140,7 +140,7 @@ namespace Xreeple.Bukalemun.Services.Tests
                 Store = store,
                 Table = table,
                 PrimaryKey = "key1",
-                ColumnName = column,
+                Column = column,
                 Encrypted = [1, 2, 3],
             };
             var camouflaged2 = new CamouflagedEntity
@@ -148,7 +148,7 @@ namespace Xreeple.Bukalemun.Services.Tests
                 Store = store,
                 Table = table,
                 PrimaryKey = "key2",
-                ColumnName = column,
+                Column = column,
                 Encrypted = [4, 5, 6],
             };
 
@@ -189,7 +189,7 @@ namespace Xreeple.Bukalemun.Services.Tests
                 Store = store,
                 Table = table,
                 PrimaryKey = key,
-                ColumnName = "column1",
+                Column = "column1",
                 Encrypted = [1, 2, 3],
             };
             var camouflaged2 = new CamouflagedEntity
@@ -197,7 +197,7 @@ namespace Xreeple.Bukalemun.Services.Tests
                 Store = store,
                 Table = table,
                 PrimaryKey = key,
-                ColumnName = "column2",
+                Column = "column2",
                 Encrypted = [4, 5, 6],
             };
 
@@ -238,7 +238,7 @@ namespace Xreeple.Bukalemun.Services.Tests
                 Store = store,
                 Table = table,
                 PrimaryKey = "key1",
-                ColumnName = "column1",
+                Column = "column1",
                 Encrypted = null,
             };
 

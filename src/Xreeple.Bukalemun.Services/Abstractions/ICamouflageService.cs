@@ -4,31 +4,25 @@ namespace Xreeple.Bukalemun.Services.Abstractions;
 
 internal interface ICamouflageService
 {
-    Task CreateAsync(
-        string store,
-        string table,
-        string primaryKey,
-        string columnName,
-        string value
-    );
+    Task CreateAsync(string store, string table, string primaryKey, string column, string value);
     Task CreateAsync(object obj);
-    Task<Uncamouflaged?> GetAsync(string store, string table, string primaryKey, string columnName);
+    Task<Uncamouflaged?> GetAsync(string store, string table, string primaryKey, string column);
     Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
         string table,
         string[] primaryKeys,
-        string columnName
+        string column
     );
     Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
         string table,
         string primaryKey,
-        string[] columnNames
+        string[] columns
     );
     Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
         string table,
         string[] primaryKeys,
-        string[] columnNames
+        string[] columns
     );
 }

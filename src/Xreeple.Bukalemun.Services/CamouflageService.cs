@@ -19,7 +19,7 @@ internal sealed class CamouflageService(
         string store,
         string table,
         string primaryKey,
-        string columnName,
+        string column,
         string value
     )
     {
@@ -32,7 +32,7 @@ internal sealed class CamouflageService(
                 Store = store,
                 Table = table,
                 PrimaryKey = primaryKey,
-                ColumnName = columnName,
+                Column = column,
                 Encrypted = encrypted,
             }
         );
@@ -42,50 +42,45 @@ internal sealed class CamouflageService(
         string store,
         string table,
         string primaryKey,
-        string columnName
+        string column
     )
     {
-        return (await GetAsync(store, table, [primaryKey], [columnName])).FirstOrDefault();
+        return (await GetAsync(store, table, [primaryKey], [column])).FirstOrDefault();
     }
 
     public async Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
         string table,
         string[] primaryKeys,
-        string columnName
+        string column
     )
     {
-        return await GetAsync(store, table, primaryKeys, [columnName]);
+        return await GetAsync(store, table, primaryKeys, [column]);
     }
 
     public async Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
         string table,
         string primaryKey,
-        string[] columnNames
+        string[] columns
     )
     {
-        return await GetAsync(store, table, [primaryKey], columnNames);
+        return await GetAsync(store, table, [primaryKey], columns);
     }
 
     public async Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
         string table,
         string[] primaryKeys,
-        string[] columnNames
+        string[] columns
     )
     {
-        var camouflaged = await _camouflageRepository.GetAsync(
-            store,
-            table,
-            primaryKeys,
-            columnNames
-        );
+        var camouflaged = await _camouflageRepository.GetAsync(store, table, primaryKeys, columns);
 
         var result = camouflaged.Select(m => new Uncamouflaged()
         {
             Key = m.PrimaryKey,
-            Name = m.ColumnName,
+            Name = m.Column,
             Value = m.Encrypted is not null
                 ? _cryptoProvider.Decrypt(
                     _bukalemunOptions.Value.Stores[store].EncryptKey,
@@ -144,12 +139,12 @@ internal sealed class CamouflageService(
 
         foreach (var camouflageableProperty in camouflageableProperties)
         {
-            string columnName = camouflageableProperty.Name;
+            string column = camouflageableProperty.Name;
             string value =
                 camouflageableProperty.GetValue(obj)?.ToString()
                 ?? throw new NullReferenceException("The value cannot be null.");
 
-            await CreateAsync(store, table, primaryKey, columnName, value);
+            await CreateAsync(store, table, primaryKey, column, value);
         }
     }
 }

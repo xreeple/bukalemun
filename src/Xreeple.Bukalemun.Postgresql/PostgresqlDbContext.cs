@@ -34,11 +34,11 @@ internal class PostgresqlDbContext(string _connectionString, string _schema) : I
                     CREATE TABLE IF NOT EXISTS "{store}" (
                         "Table" TEXT NOT NULL,
                         "PrimaryKey" TEXT NOT NULL,
-                        "ColumnName" TEXT NOT NULL,
+                        "Column" TEXT NOT NULL,
                         "Encrypted" bytea,
                         "CreatedAt" TIMESTAMP NOT NULL,
                         "UpdatedAt" TIMESTAMP NOT NULL,
-                        PRIMARY KEY ("Table", "PrimaryKey", "ColumnName")
+                        PRIMARY KEY ("Table", "PrimaryKey", "Column")
                     );
                 """;
 
