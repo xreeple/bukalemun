@@ -11,6 +11,7 @@ internal interface ICamouflageService
         string columnName,
         string value
     );
+    Task CreateAsync(object obj);
     Task<Uncamouflaged?> GetAsync(
         string store,
         string tableName,

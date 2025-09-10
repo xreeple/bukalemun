@@ -22,6 +22,7 @@ public interface IBukalemun
         string columnName,
         string value
     );
+    Task CamouflageAsync(object obj);
 
     /// <summary>
     /// Retrieves the decrypted value for the specified record and column.

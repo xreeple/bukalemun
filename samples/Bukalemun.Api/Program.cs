@@ -4,6 +4,7 @@ using Xreeple.Bukalemun.Abstractions;
 using Xreeple.Bukalemun.DependencyInjectionExtensions.Extensions;
 using Xreeple.Bukalemun.Masking;
 using Xreeple.Bukalemun.Postgresql;
+using Xreeple.Bukalemun.Services.Attributes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,15 @@ app.MapGet(
             await bukalemun.CamouflageAsync("Default", "users", "2", "name", "John Doe");
             scope.Complete();
         }
+
+        var user = new User
+        {
+            Id = "1",
+            Name = "Jane Doe",
+            Email = "",
+        };
+
+        await bukalemun.CamouflageAsync(user);
 
         using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
@@ -126,10 +136,7 @@ app.MapGet(
         );
 
         Console.WriteLine(
-            Mask.Build("mehmet emin eker")
-                .RevealInitialsPerWord()
-                .RemoveMasked()
-                .ToString()
+            Mask.Build("mehmet emin eker").RevealInitialsPerWord().RemoveMasked().ToString()
         );
         // mee
 
@@ -149,6 +156,20 @@ app.Run();
 public class BukalemunUser
 {
     public string Id { get; set; } = null!;
+    public string Name { get; set; } = null!;
+    public string Email { get; set; } = null!;
+}
+
+//[Camouflage(Store = "Users", TableName = "User")]
+//[Camouflage]
+//[Camouflage(Store = "Default", TableName = "asd")]
+[Camouflage("Default")]
+public class User
+{
+    [PrimaryKey]
+    public string Id { get; set; } = null!;
+
+    [Camouflageable]
     public string Name { get; set; } = null!;
     public string Email { get; set; } = null!;
 }

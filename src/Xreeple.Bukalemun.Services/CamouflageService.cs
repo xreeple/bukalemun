@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Reflection;
+using Microsoft.Extensions.Options;
 using Xreeple.Bukalemun.Data.Abstractions;
 using Xreeple.Bukalemun.Providers.Abstractions;
 using Xreeple.Bukalemun.Services.Abstractions;
+using Xreeple.Bukalemun.Services.Attributes;
 using Xreeple.Bukalemun.Services.Models;
 using Xreeple.Bukalemun.Services.Options;
 
@@ -93,5 +95,61 @@ internal sealed class CamouflageService(
         });
 
         return result;
+    }
+
+    public async Task CreateAsync(object obj)
+    {
+        ArgumentNullException.ThrowIfNull(obj);
+
+        var type = obj.GetType();
+
+        if (!type.IsClass || type == typeof(string))
+            throw new ArgumentException("Only class types can be processed.", nameof(obj));
+
+        var camouflageAttribute =
+            type.GetCustomAttribute<CamouflageAttribute>()
+            ?? throw new ArgumentException(
+                "The class must be decorated with [Camouflage].",
+                nameof(obj)
+            );
+
+        string store = camouflageAttribute.Store;
+        string tableName =
+            camouflageAttribute.TableName == "default" ? type.Name : camouflageAttribute.TableName;
+
+        var properties = type.GetProperties().Where(p => p.CanRead);
+
+        string? primaryKey = string.Join(
+            "",
+            properties
+                .Where(p => Attribute.IsDefined(p, typeof(PrimaryKeyAttribute)))
+                .OrderBy(p => p.GetCustomAttribute<PrimaryKeyAttribute>()?.Order ?? 0)
+                .ToArray()
+                .Select(p => p.GetValue(obj)?.ToString())
+        );
+
+        if (string.IsNullOrEmpty(primaryKey))
+        {
+            primaryKey = properties.FirstOrDefault(p => p.Name == "Id")?.GetValue(obj)?.ToString();
+
+            if (string.IsNullOrEmpty(primaryKey))
+            {
+                throw new ArgumentException("The primary key is required.", nameof(obj));
+            }
+        }
+
+        var camouflageableProperties = properties
+            .Where(p => p.CanWrite && Attribute.IsDefined(p, typeof(CamouflageableAttribute)))
+            .ToArray();
+
+        foreach (var camouflageableProperty in camouflageableProperties)
+        {
+            string columnName = camouflageableProperty.Name;
+            string value =
+                camouflageableProperty.GetValue(obj)?.ToString()
+                ?? throw new NullReferenceException("The value cannot be null.");
+
+            await CreateAsync(store, tableName, primaryKey, columnName, value);
+        }
     }
 }
