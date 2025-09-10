@@ -32,13 +32,13 @@ internal class PostgresqlDbContext(string _connectionString, string _schema) : I
                     SET search_path = '{_schema}';
 
                     CREATE TABLE IF NOT EXISTS "{store}" (
-                        "TableName" TEXT NOT NULL,
+                        "Table" TEXT NOT NULL,
                         "PrimaryKey" TEXT NOT NULL,
                         "ColumnName" TEXT NOT NULL,
                         "Encrypted" bytea,
                         "CreatedAt" TIMESTAMP NOT NULL,
                         "UpdatedAt" TIMESTAMP NOT NULL,
-                        PRIMARY KEY ("TableName", "PrimaryKey", "ColumnName")
+                        PRIMARY KEY ("Table", "PrimaryKey", "ColumnName")
                     );
                 """;
 

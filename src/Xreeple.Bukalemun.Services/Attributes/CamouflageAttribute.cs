@@ -4,17 +4,17 @@
 public class CamouflageAttribute : Attribute
 {
     public string Store;
-    public string TableName;
+    public string Table;
 
     public CamouflageAttribute(string store)
     {
         Store = store;
-        TableName = "default";
+        Table = "default";
     }
 
-    public CamouflageAttribute(string store, string tableName)
+    public CamouflageAttribute(string store, string table)
     {
         Store = store;
-        TableName = tableName;
+        Table = table;
     }
 }

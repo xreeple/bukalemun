@@ -70,7 +70,7 @@ namespace Xreeple.Bukalemun.Services.Tests
                     r.UpsertAsync(
                         It.Is<CamouflagedEntity>(c =>
                             c.Store == store
-                            && c.TableName == table
+                            && c.Table == table
                             && c.PrimaryKey == key
                             && c.ColumnName == column
                             && c.Encrypted != null
@@ -94,7 +94,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             var camouflaged = new CamouflagedEntity
             {
                 Store = store,
-                TableName = table,
+                Table = table,
                 PrimaryKey = key,
                 ColumnName = column,
                 Encrypted = [1, 2, 3],
@@ -138,7 +138,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             var camouflaged1 = new CamouflagedEntity
             {
                 Store = store,
-                TableName = table,
+                Table = table,
                 PrimaryKey = "key1",
                 ColumnName = column,
                 Encrypted = [1, 2, 3],
@@ -146,7 +146,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             var camouflaged2 = new CamouflagedEntity
             {
                 Store = store,
-                TableName = table,
+                Table = table,
                 PrimaryKey = "key2",
                 ColumnName = column,
                 Encrypted = [4, 5, 6],
@@ -187,7 +187,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             var camouflaged1 = new CamouflagedEntity
             {
                 Store = store,
-                TableName = table,
+                Table = table,
                 PrimaryKey = key,
                 ColumnName = "column1",
                 Encrypted = [1, 2, 3],
@@ -195,7 +195,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             var camouflaged2 = new CamouflagedEntity
             {
                 Store = store,
-                TableName = table,
+                Table = table,
                 PrimaryKey = key,
                 ColumnName = "column2",
                 Encrypted = [4, 5, 6],
@@ -236,7 +236,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             var camouflaged = new CamouflagedEntity
             {
                 Store = store,
-                TableName = table,
+                Table = table,
                 PrimaryKey = "key1",
                 ColumnName = "column1",
                 Encrypted = null,

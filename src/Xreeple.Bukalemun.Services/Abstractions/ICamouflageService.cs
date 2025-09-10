@@ -6,33 +6,28 @@ internal interface ICamouflageService
 {
     Task CreateAsync(
         string store,
-        string tableName,
+        string table,
         string primaryKey,
         string columnName,
         string value
     );
     Task CreateAsync(object obj);
-    Task<Uncamouflaged?> GetAsync(
-        string store,
-        string tableName,
-        string primaryKey,
-        string columnName
-    );
+    Task<Uncamouflaged?> GetAsync(string store, string table, string primaryKey, string columnName);
     Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
-        string tableName,
+        string table,
         string[] primaryKeys,
         string columnName
     );
     Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
-        string tableName,
+        string table,
         string primaryKey,
         string[] columnNames
     );
     Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
-        string tableName,
+        string table,
         string[] primaryKeys,
         string[] columnNames
     );

@@ -160,9 +160,9 @@ public class BukalemunUser
     public string Email { get; set; } = null!;
 }
 
-//[Camouflage(Store = "Users", TableName = "User")]
+//[Camouflage(Store = "Users", Table = "User")]
 //[Camouflage]
-//[Camouflage(Store = "Default", TableName = "asd")]
+//[Camouflage(Store = "Default", Table = "asd")]
 [Camouflage("Default")]
 public class User
 {

@@ -17,7 +17,7 @@ internal sealed class CamouflageService(
 {
     public async Task CreateAsync(
         string store,
-        string tableName,
+        string table,
         string primaryKey,
         string columnName,
         string value
@@ -30,7 +30,7 @@ internal sealed class CamouflageService(
             new Data.Entites.Camouflaged()
             {
                 Store = store,
-                TableName = tableName,
+                Table = table,
                 PrimaryKey = primaryKey,
                 ColumnName = columnName,
                 Encrypted = encrypted,
@@ -40,44 +40,44 @@ internal sealed class CamouflageService(
 
     public async Task<Uncamouflaged?> GetAsync(
         string store,
-        string tableName,
+        string table,
         string primaryKey,
         string columnName
     )
     {
-        return (await GetAsync(store, tableName, [primaryKey], [columnName])).FirstOrDefault();
+        return (await GetAsync(store, table, [primaryKey], [columnName])).FirstOrDefault();
     }
 
     public async Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
-        string tableName,
+        string table,
         string[] primaryKeys,
         string columnName
     )
     {
-        return await GetAsync(store, tableName, primaryKeys, [columnName]);
+        return await GetAsync(store, table, primaryKeys, [columnName]);
     }
 
     public async Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
-        string tableName,
+        string table,
         string primaryKey,
         string[] columnNames
     )
     {
-        return await GetAsync(store, tableName, [primaryKey], columnNames);
+        return await GetAsync(store, table, [primaryKey], columnNames);
     }
 
     public async Task<IEnumerable<Uncamouflaged>> GetAsync(
         string store,
-        string tableName,
+        string table,
         string[] primaryKeys,
         string[] columnNames
     )
     {
         var camouflaged = await _camouflageRepository.GetAsync(
             store,
-            tableName,
+            table,
             primaryKeys,
             columnNames
         );
@@ -114,8 +114,8 @@ internal sealed class CamouflageService(
             );
 
         string store = camouflageAttribute.Store;
-        string tableName =
-            camouflageAttribute.TableName == "default" ? type.Name : camouflageAttribute.TableName;
+        string table =
+            camouflageAttribute.Table == "default" ? type.Name : camouflageAttribute.Table;
 
         var properties = type.GetProperties().Where(p => p.CanRead);
 
@@ -149,7 +149,7 @@ internal sealed class CamouflageService(
                 camouflageableProperty.GetValue(obj)?.ToString()
                 ?? throw new NullReferenceException("The value cannot be null.");
 
-            await CreateAsync(store, tableName, primaryKey, columnName, value);
+            await CreateAsync(store, table, primaryKey, columnName, value);
         }
     }
 }

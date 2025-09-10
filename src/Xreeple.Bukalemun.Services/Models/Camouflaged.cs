@@ -3,7 +3,7 @@
 public sealed class Camouflaged
 {
     public string Store { get; set; } = null!;
-    public string TableName { get; set; } = null!;
+    public string Table { get; set; } = null!;
     public string PrimaryKey { get; set; } = null!;
     public string ColumnName { get; set; } = null!;
     public byte[]? Encrypted { get; set; }
