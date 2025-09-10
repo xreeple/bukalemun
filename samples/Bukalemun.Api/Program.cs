@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Xreeple.Bukalemun.Abstractions;
 using Xreeple.Bukalemun.DependencyInjectionExtensions.Extensions;
 using Xreeple.Bukalemun.Masking;
+using Xreeple.Bukalemun.Masking.Attributes;
 using Xreeple.Bukalemun.Postgresql;
 using Xreeple.Bukalemun.Services.Attributes;
 
@@ -28,10 +29,12 @@ app.MapGet(
         {
             Id = "1",
             Name = "Jane Doe",
-            Email = "",
+            Email = "test@test.com",
         };
 
         await bukalemun.CamouflageAsync(user);
+
+        user.ApplyMasking();
 
         using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
@@ -171,5 +174,7 @@ public class User
 
     [Camouflageable]
     public string Name { get; set; } = null!;
+
+    [Mask(RevealFirst = 3, CompactMask = 3)]
     public string Email { get; set; } = null!;
 }
