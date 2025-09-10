@@ -10,12 +10,12 @@ internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukale
     public async Task CamouflageAsync(
         string store,
         string table,
-        string primaryKey,
+        string key,
         string column,
         string value
     )
     {
-        await _camouflageService.CreateAsync(store, table, primaryKey, column, value);
+        await _camouflageService.CreateAsync(store, table, key, column, value);
     }
 
     public async Task CamouflageAsync(object obj)
@@ -26,85 +26,80 @@ internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukale
     public async Task<Uncamouflaged?> UncamouflageAsync(
         string store,
         string table,
-        string primaryKey,
+        string key,
         string column
     )
     {
-        return await _camouflageService.GetAsync(store, table, primaryKey, column);
+        return await _camouflageService.GetAsync(store, table, key, column);
     }
 
     public async Task<IEnumerable<Uncamouflaged>> UncamouflageAsync(
         string store,
         string table,
-        string[] primaryKeys,
+        string[] keys,
         string column
     )
     {
-        return await _camouflageService.GetAsync(store, table, primaryKeys, column);
+        return await _camouflageService.GetAsync(store, table, keys, column);
     }
 
     public async Task<IEnumerable<Uncamouflaged>> UncamouflageAsync(
         string store,
         string table,
-        string primaryKey,
+        string key,
         string[] columns
     )
     {
-        return await _camouflageService.GetAsync(store, table, primaryKey, columns);
+        return await _camouflageService.GetAsync(store, table, key, columns);
     }
 
     public async Task<IEnumerable<Uncamouflaged>> UncamouflageAsync(
         string store,
         string table,
-        string[] primaryKeys,
+        string[] keys,
         string[] columns
     )
     {
-        return await _camouflageService.GetAsync(store, table, primaryKeys, columns);
+        return await _camouflageService.GetAsync(store, table, keys, columns);
     }
 
     public async Task<IEnumerable<T>> UncamouflageAsync<T>(
         string store,
         string table,
-        string[] primaryKeys,
-        string[] columns
-    )
-        where T : new()
-    {
-        return (await UncamouflageAsync(store, table, primaryKeys, columns)).MapTo<T>();
-    }
-
-    public async Task<IEnumerable<T>> UncamouflageAsync<T>(
-        string store,
-        string table,
-        string primaryKey,
+        string[] keys,
         string[] columns
     )
         where T : new()
     {
-        return (await UncamouflageAsync(store, table, primaryKey, columns)).MapTo<T>();
+        return (await UncamouflageAsync(store, table, keys, columns)).MapTo<T>();
     }
 
     public async Task<IEnumerable<T>> UncamouflageAsync<T>(
         string store,
         string table,
-        string[] primaryKeys,
+        string key,
+        string[] columns
+    )
+        where T : new()
+    {
+        return (await UncamouflageAsync(store, table, key, columns)).MapTo<T>();
+    }
+
+    public async Task<IEnumerable<T>> UncamouflageAsync<T>(
+        string store,
+        string table,
+        string[] keys,
         string column
     )
         where T : new()
     {
-        return (await UncamouflageAsync(store, table, primaryKeys, column)).MapTo<T>();
+        return (await UncamouflageAsync(store, table, keys, column)).MapTo<T>();
     }
 
-    public async Task<T> UncamouflageAsync<T>(
-        string store,
-        string table,
-        string primaryKey,
-        string column
-    )
+    public async Task<T> UncamouflageAsync<T>(string store, string table, string key, string column)
         where T : new()
     {
-        var uncamouflaged = await UncamouflageAsync(store, table, primaryKey, column);
+        var uncamouflaged = await UncamouflageAsync(store, table, key, column);
 
         if (uncamouflaged is null)
         {

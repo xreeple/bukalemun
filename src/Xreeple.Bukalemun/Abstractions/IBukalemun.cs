@@ -12,16 +12,10 @@ public interface IBukalemun
     /// </summary>
     /// <param name="store">The data store identifier.</param>
     /// <param name="table">The table name containing the data.</param>
-    /// <param name="primaryKey">The primary key identifying the record.</param>
+    /// <param name="key">The primary key identifying the record.</param>
     /// <param name="column">The column name to camouflage.</param>
     /// <param name="value">The value to camouflage (encrypt).</param>
-    Task CamouflageAsync(
-        string store,
-        string table,
-        string primaryKey,
-        string column,
-        string value
-    );
+    Task CamouflageAsync(string store, string table, string key, string column, string value);
     Task CamouflageAsync(object obj);
 
     /// <summary>
@@ -29,28 +23,23 @@ public interface IBukalemun
     /// </summary>
     /// <param name="store">The data store identifier.</param>
     /// <param name="table">The table name containing the data.</param>
-    /// <param name="primaryKey">The primary key identifying the record.</param>
+    /// <param name="key">The primary key identifying the record.</param>
     /// <param name="column">The column name to uncamoﬂage (decrypt).</param>
     /// <returns>The decrypted value wrapped in an <see cref="Uncamouflaged"/> instance, or null if not found.</returns>
-    Task<Uncamouflaged?> UncamouflageAsync(
-        string store,
-        string table,
-        string primaryKey,
-        string column
-    );
+    Task<Uncamouflaged?> UncamouflageAsync(string store, string table, string key, string column);
 
     /// <summary>
     /// Retrieves decrypted values for multiple records and columns.
     /// </summary>
     /// <param name="store">The data store identifier.</param>
     /// <param name="table">The table name containing the data.</param>
-    /// <param name="primaryKeys">Array of primary keys identifying the records.</param>
+    /// <param name="keys">Array of primary keys identifying the records.</param>
     /// <param name="columns">Array of column names to uncamoﬂage (decrypt).</param>
     /// <returns>A collection of <see cref="Uncamouflaged"/> instances.</returns>
     Task<IEnumerable<Uncamouflaged>> UncamouflageAsync(
         string store,
         string table,
-        string[] primaryKeys,
+        string[] keys,
         string[] columns
     );
 
@@ -59,13 +48,13 @@ public interface IBukalemun
     /// </summary>
     /// <param name="store">The data store identifier.</param>
     /// <param name="table">The table name containing the data.</param>
-    /// <param name="primaryKeys">Array of primary keys identifying the records.</param>
+    /// <param name="keys">Array of primary keys identifying the records.</param>
     /// <param name="column">The column name to uncamoﬂage (decrypt).</param>
     /// <returns>A collection of <see cref="Uncamouflaged"/> instances.</returns>
     Task<IEnumerable<Uncamouflaged>> UncamouflageAsync(
         string store,
         string table,
-        string[] primaryKeys,
+        string[] keys,
         string column
     );
 
@@ -74,13 +63,13 @@ public interface IBukalemun
     /// </summary>
     /// <param name="store">The data store identifier.</param>
     /// <param name="table">The table name containing the data.</param>
-    /// <param name="primaryKey">The primary key identifying the record.</param>
+    /// <param name="key">The primary key identifying the record.</param>
     /// <param name="columns">Array of column names to uncamoﬂage (decrypt).</param>
     /// <returns>A collection of <see cref="Uncamouflaged"/> instances.</returns>
     Task<IEnumerable<Uncamouflaged>> UncamouflageAsync(
         string store,
         string table,
-        string primaryKey,
+        string key,
         string[] columns
     );
 
@@ -90,13 +79,13 @@ public interface IBukalemun
     /// <typeparam name="T">The type to map the results to. Must have a parameterless constructor.</typeparam>
     /// <param name="store">The data store identifier.</param>
     /// <param name="table">The table name containing the data.</param>
-    /// <param name="primaryKeys">Array of primary keys identifying the records.</param>
+    /// <param name="keys">Array of primary keys identifying the records.</param>
     /// <param name="columns">Array of column names to uncamoﬂage (decrypt).</param>
     /// <returns>An enumerable of <typeparamref name="T"/> instances.</returns>
     Task<IEnumerable<T>> UncamouflageAsync<T>(
         string store,
         string table,
-        string[] primaryKeys,
+        string[] keys,
         string[] columns
     )
         where T : new();
@@ -107,13 +96,13 @@ public interface IBukalemun
     /// <typeparam name="T">The type to map the results to. Must have a parameterless constructor.</typeparam>
     /// <param name="store">The data store identifier.</param>
     /// <param name="table">The table name containing the data.</param>
-    /// <param name="primaryKey">The primary key identifying the record.</param>
+    /// <param name="key">The primary key identifying the record.</param>
     /// <param name="columns">Array of column names to uncamoﬂage (decrypt).</param>
     /// <returns>An enumerable of <typeparamref name="T"/> instances.</returns>
     Task<IEnumerable<T>> UncamouflageAsync<T>(
         string store,
         string table,
-        string primaryKey,
+        string key,
         string[] columns
     )
         where T : new();
@@ -124,13 +113,13 @@ public interface IBukalemun
     /// <typeparam name="T">The type to map the results to. Must have a parameterless constructor.</typeparam>
     /// <param name="store">The data store identifier.</param>
     /// <param name="table">The table name containing the data.</param>
-    /// <param name="primaryKeys">Array of primary keys identifying the records.</param>
+    /// <param name="keys">Array of primary keys identifying the records.</param>
     /// <param name="column">The column name to uncamoﬂage (decrypt).</param>
     /// <returns>An enumerable of <typeparamref name="T"/> instances.</returns>
     Task<IEnumerable<T>> UncamouflageAsync<T>(
         string store,
         string table,
-        string[] primaryKeys,
+        string[] keys,
         string column
     )
         where T : new();
@@ -141,9 +130,9 @@ public interface IBukalemun
     /// <typeparam name="T">The type to map the result to. Must have a parameterless constructor.</typeparam>
     /// <param name="store">The data store identifier.</param>
     /// <param name="table">The table name containing the data.</param>
-    /// <param name="primaryKey">The primary key identifying the record.</param>
+    /// <param name="key">The primary key identifying the record.</param>
     /// <param name="column">The column name to uncamoﬂage (decrypt).</param>
     /// <returns>An instance of <typeparamref name="T"/>.</returns>
-    Task<T> UncamouflageAsync<T>(string store, string table, string primaryKey, string column)
+    Task<T> UncamouflageAsync<T>(string store, string table, string key, string column)
         where T : new();
 }

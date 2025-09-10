@@ -71,7 +71,7 @@ namespace Xreeple.Bukalemun.Services.Tests
                         It.Is<CamouflagedEntity>(c =>
                             c.Store == store
                             && c.Table == table
-                            && c.PrimaryKey == key
+                            && c.Key == key
                             && c.Column == column
                             && c.Encrypted != null
                             && c.Encrypted.SequenceEqual(encryptedValue)
@@ -95,7 +95,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             {
                 Store = store,
                 Table = table,
-                PrimaryKey = key,
+                Key = key,
                 Column = column,
                 Encrypted = [1, 2, 3],
             };
@@ -139,7 +139,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             {
                 Store = store,
                 Table = table,
-                PrimaryKey = "key1",
+                Key = "key1",
                 Column = column,
                 Encrypted = [1, 2, 3],
             };
@@ -147,7 +147,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             {
                 Store = store,
                 Table = table,
-                PrimaryKey = "key2",
+                Key = "key2",
                 Column = column,
                 Encrypted = [4, 5, 6],
             };
@@ -188,7 +188,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             {
                 Store = store,
                 Table = table,
-                PrimaryKey = key,
+                Key = key,
                 Column = "column1",
                 Encrypted = [1, 2, 3],
             };
@@ -196,7 +196,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             {
                 Store = store,
                 Table = table,
-                PrimaryKey = key,
+                Key = key,
                 Column = "column2",
                 Encrypted = [4, 5, 6],
             };
@@ -237,7 +237,7 @@ namespace Xreeple.Bukalemun.Services.Tests
             {
                 Store = store,
                 Table = table,
-                PrimaryKey = "key1",
+                Key = "key1",
                 Column = "column1",
                 Encrypted = null,
             };
