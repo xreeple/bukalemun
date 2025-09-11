@@ -6,6 +6,7 @@ namespace Xreeple.Bukalemun.Masking;
 public static class MaskingExtensions
 {
     public static T ApplyMasking<T>(this T obj)
+        where T : class
     {
         var type = typeof(T);
 
