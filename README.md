@@ -1,6 +1,6 @@
 # Bukalemun
 
-![Tests](https://github.com/xreeple/bukalemun/actions/workflows/dotnet-tests.yml/badge.svg)
+![Unit Tests](https://github.com/xreeple/bukalemun/actions/workflows/dotnet-tests.yml/badge.svg)
 
 Bukalemun 🦎 – Flexible and Secure Data Encryption Library for .NET
 Bukalemun is a lightweight and flexible encryption library for .NET applications, designed to securely store sensitive and personal data in databases.
@@ -31,6 +31,87 @@ It was built to enhance data privacy and help comply with regulations such as GD
 - Encrypting personal data (e.g., name, national ID, phone number, email, etc.)
 - Enhancing data security at the application layer
 - Providing masked data to minimize data leakage risk
+
+## 💾 Install
+
+The Xreeple.Bukalemun.DependencyInjectionExtensions library also provides other packages. Therefore, to get started, simply add the Xreeple.Bukalemun.DependencyInjectionExtensions library to your project.
+
+```bash
+dotnet add package Xreeple.Bukalemun.DependencyInjectionExtensions
+```
+
+### Use PostgreSQL
+
+Currently, only PostgreSQL databases are supported. If you are using PostgreSQL, you should install this package.
+
+```bash
+dotnet add package Xreeple.Bukalemun.Postgresql
+```
+
+## Quick Start
+
+The IServiceCollection extension should be used for dependency management.
+
+```csharp
+using Xreeple.Bukalemun.DependencyInjectionExtensions.Extensions;
+
+builder.Services.AddBukalemun(builder.Configuration);
+```
+
+### With PostgreSQL
+
+The UseNpgsql extension must be used for PostgreSQL. The default schema is the "public" schema. The default Connection String key is the "DefaultConnection" key. You can specify the schema using the "schema" parameter.
+
+```csharp
+using Xreeple.Bukalemun.DependencyInjectionExtensions.Extensions;
+
+builder.Services.AddBukalemun(builder.Configuration).UseNpgsql();
+```
+
+### Configurations
+
+The "Store" definition is mandatory in the configuration section. At least one store must be defined. Store definitions can be made as needed.
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": ""
+  },
+  "Bukalemun": {
+    "Stores": {
+      "Default": {
+        "EncryptKey": ""
+      }
+    }
+  }
+}
+```
+
+### Simple usage
+
+IBukalemun is available through DI.
+
+```csharp
+private readonly IBukalemun _bukalemun;
+
+await _bukalemun.CamouflageAsync("Store", "Table", "Key", "Column", "Value");
+```
+
+### Transactional usage
+
+TransactionScope can be used for transactional use.
+
+```csharp
+using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+{
+    await bukalemun.CamouflageAsync("Store", "Table", "Key", "Column", "Value");
+
+    // Other transactions
+    // ...
+
+    scope.Complete();
+}
+```
 
 ## 📄 License
 MIT License
