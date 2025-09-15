@@ -1,4 +1,5 @@
-﻿using Xreeple.Bukalemun.Services.Models;
+﻿using System.Reflection;
+using Xreeple.Bukalemun.Services.Models;
 
 namespace Xreeple.Bukalemun.Extensions;
 
@@ -7,6 +8,31 @@ namespace Xreeple.Bukalemun.Extensions;
 /// </summary>
 public static class UncamouflagedExtensions
 {
+    private static T MapGroupToObject<T>(IGrouping<object, Uncamouflaged> group, T obj)
+    {
+        var type = typeof(T);
+
+        // Key ya da Id property set et
+        var keyProp = type.GetProperty("Id") ?? type.GetProperty("Key");
+        keyProp?.SetValue(obj, group.Key);
+
+        // Diğer propertyleri doldur
+        foreach (var item in group)
+        {
+            var prop = type.GetProperty(
+                item.Name,
+                BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance
+            );
+
+            if (prop != null && prop.CanWrite)
+            {
+                prop.SetValue(obj, Convert.ChangeType(item.Value, prop.PropertyType));
+            }
+        }
+
+        return obj;
+    }
+
     /// <summary>
     /// Maps an enumerable of <see cref="Uncamouflaged"/> grouped by their keys to an enumerable of strongly typed objects.
     /// </summary>
@@ -16,32 +42,13 @@ public static class UncamouflagedExtensions
     public static IEnumerable<T> MapTo<T>(this IEnumerable<Uncamouflaged> uncamouflaged)
         where T : new()
     {
-        var grouped = uncamouflaged.GroupBy(u => u.Key);
+        return uncamouflaged.GroupBy(u => u.Key).Select(group => MapGroupToObject(group, new T()));
+    }
 
-        foreach (var group in grouped)
-        {
-            var obj = new T();
-            var type = typeof(T);
-
-            var keyProp = type.GetProperty("Id") ?? type.GetProperty("Key");
-            keyProp?.SetValue(obj, group.Key);
-
-            foreach (var item in group)
-            {
-                var prop = type.GetProperty(
-                    item.Name,
-                    System.Reflection.BindingFlags.IgnoreCase
-                        | System.Reflection.BindingFlags.Public
-                        | System.Reflection.BindingFlags.Instance
-                );
-                if (prop != null && prop.CanWrite)
-                {
-                    prop.SetValue(obj, Convert.ChangeType(item.Value, prop.PropertyType));
-                }
-            }
-
-            yield return obj;
-        }
+    public static IEnumerable<T> MapTo<T>(this IEnumerable<Uncamouflaged> uncamouflaged, T obj)
+        where T : new()
+    {
+        return uncamouflaged.GroupBy(u => u.Key).Select(group => MapGroupToObject(group, obj));
     }
 
     /// <summary>

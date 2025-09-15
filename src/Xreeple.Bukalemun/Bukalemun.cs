@@ -18,9 +18,18 @@ internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukale
         await _camouflageService.CreateAsync(store, table, key, column, value);
     }
 
-    public async Task CamouflageAsync(object obj)
+    public async Task CamouflageAsync<T>(T obj)
+        where T : new()
     {
         await _camouflageService.CreateAsync(obj);
+    }
+
+    public async Task<T> UncamouflageAsync<T>(T obj)
+        where T : new()
+    {
+        ArgumentNullException.ThrowIfNull(obj);
+
+        return (await _camouflageService.GetAsync(obj)).MapTo(obj).First();
     }
 
     public async Task<Uncamouflaged?> UncamouflageAsync(

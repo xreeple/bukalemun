@@ -92,7 +92,8 @@ internal sealed class CamouflageService(
         return result;
     }
 
-    public async Task<IEnumerable<Uncamouflaged>> GetAsync(object obj)
+    public async Task<IEnumerable<Uncamouflaged>> GetAsync<T>(T obj)
+        where T : new()
     {
         ExtractCamouflageMetadata(
             obj,
@@ -107,7 +108,8 @@ internal sealed class CamouflageService(
         return await GetAsync(store, table, key, columns);
     }
 
-    public async Task CreateAsync(object obj)
+    public async Task CreateAsync<T>(T obj)
+        where T : new()
     {
         ExtractCamouflageMetadata(
             obj,
@@ -120,21 +122,25 @@ internal sealed class CamouflageService(
         foreach (var camouflageableProperty in camouflageableProperties)
         {
             string column = camouflageableProperty.Name;
-            string value =
-                camouflageableProperty.GetValue(obj)?.ToString()
-                ?? throw new NullReferenceException("The value cannot be null.");
+            string? value = camouflageableProperty.GetValue(obj)?.ToString();
+
+            if (string.IsNullOrEmpty(value))
+            {
+                continue;
+            }
 
             await CreateAsync(store, table, key, column, value);
         }
     }
 
-    private static void ExtractCamouflageMetadata(
-        object obj,
+    private static void ExtractCamouflageMetadata<T>(
+        T obj,
         out string store,
         out string table,
         out string key,
         out PropertyInfo[] camouflageableProperties
     )
+        where T : new()
     {
         ArgumentNullException.ThrowIfNull(obj);
 
