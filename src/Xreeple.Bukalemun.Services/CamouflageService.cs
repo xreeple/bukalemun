@@ -92,7 +92,49 @@ internal sealed class CamouflageService(
         return result;
     }
 
+    public async Task<IEnumerable<Uncamouflaged>> GetAsync(object obj)
+    {
+        ExtractCamouflageMetadata(
+            obj,
+            out string store,
+            out string table,
+            out string key,
+            out PropertyInfo[] camouflageableProperties
+        );
+
+        var columns = camouflageableProperties.Select(p => p.Name).ToArray();
+
+        return await GetAsync(store, table, key, columns);
+    }
+
     public async Task CreateAsync(object obj)
+    {
+        ExtractCamouflageMetadata(
+            obj,
+            out string store,
+            out string table,
+            out string key,
+            out PropertyInfo[] camouflageableProperties
+        );
+
+        foreach (var camouflageableProperty in camouflageableProperties)
+        {
+            string column = camouflageableProperty.Name;
+            string value =
+                camouflageableProperty.GetValue(obj)?.ToString()
+                ?? throw new NullReferenceException("The value cannot be null.");
+
+            await CreateAsync(store, table, key, column, value);
+        }
+    }
+
+    private static void ExtractCamouflageMetadata(
+        object obj,
+        out string store,
+        out string table,
+        out string key,
+        out PropertyInfo[] camouflageableProperties
+    )
     {
         ArgumentNullException.ThrowIfNull(obj);
 
@@ -108,14 +150,13 @@ internal sealed class CamouflageService(
                 nameof(obj)
             );
 
-        string store = camouflageAttribute.Store;
-        string table =
-            camouflageAttribute.Table == "default" ? type.Name : camouflageAttribute.Table;
+        store = camouflageAttribute.Store;
+        table = camouflageAttribute.Table == "default" ? type.Name : camouflageAttribute.Table;
 
         var properties = type.GetProperties().Where(p => p.CanRead);
 
-        string? key = string.Join(
-            "",
+        key = string.Join(
+            "+",
             properties
                 .Where(p => Attribute.IsDefined(p, typeof(PrimaryKeyAttribute)))
                 .OrderBy(p => p.GetCustomAttribute<PrimaryKeyAttribute>()?.Order ?? 0)
@@ -125,7 +166,9 @@ internal sealed class CamouflageService(
 
         if (string.IsNullOrEmpty(key))
         {
-            key = properties.FirstOrDefault(p => p.Name == "Id")?.GetValue(obj)?.ToString();
+            key =
+                properties.FirstOrDefault(p => p.Name == "Id")?.GetValue(obj)?.ToString()
+                ?? string.Empty;
 
             if (string.IsNullOrEmpty(key))
             {
@@ -133,18 +176,11 @@ internal sealed class CamouflageService(
             }
         }
 
-        var camouflageableProperties = properties
-            .Where(p => p.CanWrite && Attribute.IsDefined(p, typeof(CamouflageableAttribute)))
-            .ToArray();
-
-        foreach (var camouflageableProperty in camouflageableProperties)
-        {
-            string column = camouflageableProperty.Name;
-            string value =
-                camouflageableProperty.GetValue(obj)?.ToString()
-                ?? throw new NullReferenceException("The value cannot be null.");
-
-            await CreateAsync(store, table, key, column, value);
-        }
+        camouflageableProperties =
+        [
+            .. properties.Where(p =>
+                p.CanWrite && Attribute.IsDefined(p, typeof(CamouflageableAttribute))
+            ),
+        ];
     }
 }

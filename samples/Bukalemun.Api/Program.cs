@@ -34,6 +34,8 @@ app.MapGet(
 
         await bukalemun.CamouflageAsync(user);
 
+        await bukalemun.UncamouflageAsync(user);
+
         user.ApplyMasking();
 
         using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
