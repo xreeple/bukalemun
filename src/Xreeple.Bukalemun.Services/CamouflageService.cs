@@ -103,7 +103,15 @@ internal sealed class CamouflageService(
             out PropertyInfo[] camouflageableProperties
         );
 
-        var columns = camouflageableProperties.Select(p => p.Name).ToArray();
+        var columns = camouflageableProperties
+            .Select(p =>
+            {
+                var camouflageableAttribute = p.GetCustomAttribute<CamouflageableAttribute>()!;
+                return camouflageableAttribute.Column == "default"
+                    ? p.Name
+                    : camouflageableAttribute.Column;
+            })
+            .ToArray();
 
         return await GetAsync(store, table, key, columns);
     }
@@ -121,7 +129,14 @@ internal sealed class CamouflageService(
 
         foreach (var camouflageableProperty in camouflageableProperties)
         {
-            string column = camouflageableProperty.Name;
+            var camouflageableAttribute =
+                camouflageableProperty.GetCustomAttribute<CamouflageableAttribute>()!;
+
+            string column =
+                camouflageableAttribute.Column == "default"
+                    ? camouflageableProperty.Name
+                    : camouflageableAttribute.Column;
+
             string? value = camouflageableProperty.GetValue(obj)?.ToString();
 
             if (string.IsNullOrEmpty(value))

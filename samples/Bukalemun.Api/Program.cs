@@ -24,7 +24,13 @@ app.MapGet(
         //    scope.Complete();
         //}
 
-        var user = new User { Id = "1", Email = "test@test.com" };
+        var user = new User
+        {
+            Id = "1",
+            Email = "test@test.com",
+            Name = "Mehmet",
+            IdentityNumber = "123123123123123",
+        };
 
         await bukalemun.CamouflageAsync(user);
 
@@ -172,7 +178,7 @@ public class User
     [Camouflageable]
     public string Name { get; set; } = null!;
 
-    [Camouflageable]
+    [Camouflageable("Kimlik")]
     public string IdentityNumber { get; set; } = null!;
 
     [Mask(RevealFirst = 3, CompactMask = 3)]
