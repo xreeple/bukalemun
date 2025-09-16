@@ -113,7 +113,26 @@ internal sealed class CamouflageService(
             })
             .ToArray();
 
-        return await GetAsync(store, table, key, columns);
+        var uncamouflaged = (await GetAsync(store, table, key, columns)).ToList();
+
+        foreach (var item in uncamouflaged)
+        {
+            var originalPropertyName = camouflageableProperties
+                .FirstOrDefault(p =>
+                {
+                    var camouflageableAttribute = p.GetCustomAttribute<CamouflageableAttribute>()!;
+                    var column =
+                        camouflageableAttribute.Column == "default"
+                            ? p.Name
+                            : camouflageableAttribute.Column;
+                    return string.Equals(column, item.Name, StringComparison.OrdinalIgnoreCase);
+                })
+                ?.Name;
+
+            item.Name = originalPropertyName ?? item.Name;
+        }
+
+        return uncamouflaged;
     }
 
     public async Task CreateAsync<T>(T obj)

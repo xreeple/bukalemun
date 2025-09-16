@@ -29,7 +29,7 @@ app.MapGet(
             Id = "1",
             Email = "test@test.com",
             Name = "Mehmet",
-            IdentityNumber = "123123123123123",
+            //IdentityNumber = "123123123123123",
         };
 
         await bukalemun.CamouflageAsync(user);
