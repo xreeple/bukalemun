@@ -158,24 +158,40 @@ public sealed class Mask
     }
 
     /// <summary>
-    /// Reveals the first alphanumeric character (initial) of each word in the input string.
+    /// Reveals the first <paramref name="n"/> characters of each word in the input string.
     /// Words are separated by whitespace characters.
     /// </summary>
+    /// <param name="n">The number of characters to reveal from the start of each word.</param>
     /// <returns>The current <see cref="Mask"/> instance for method chaining.</returns>
-    public Mask RevealInitialsPerWord()
+    public Mask RevealInitialsPerWord(int n)
     {
+        if (n <= 0)
+            return this;
+
         bool newWord = true;
+        int remaining = 0;
 
         for (int i = 0; i < _input.Length; i++)
         {
-            if (char.IsLetterOrDigit(_input[i]) && newWord)
-            {
-                _reveal[i] = true;
-                newWord = false;
-            }
-            else if (char.IsWhiteSpace(_input[i]))
+            char current = _input[i];
+
+            if (char.IsWhiteSpace(current))
             {
                 newWord = true;
+                remaining = 0;
+                continue;
+            }
+
+            if (newWord && char.IsLetterOrDigit(current))
+            {
+                remaining = n;
+                newWord = false;
+            }
+
+            if (remaining > 0)
+            {
+                _reveal[i] = true;
+                remaining--;
             }
         }
 

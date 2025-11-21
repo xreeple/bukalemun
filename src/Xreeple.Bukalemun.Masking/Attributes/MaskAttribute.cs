@@ -13,6 +13,6 @@ public class MaskAttribute : Attribute
     public int RevealRangeStart = -1;
     public int RevealRangeLength = -1;
     public string? RevealRegex;
-    public bool RevealInitialsPerWord = false;
+    public int RevealInitialsPerWord = 0;
     public Func<char, int, bool>? RevealIf;
 }

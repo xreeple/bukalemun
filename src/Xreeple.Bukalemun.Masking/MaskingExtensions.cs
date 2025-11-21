@@ -34,8 +34,8 @@ public static class MaskingExtensions
             if (attr.CompactMask > 0)
                 builder.CompactMask(attr.CompactMask);
 
-            if (attr.RevealInitialsPerWord)
-                builder.RevealInitialsPerWord();
+            if (attr.RevealInitialsPerWord > 0)
+                builder.RevealInitialsPerWord(attr.RevealInitialsPerWord);
 
             if (attr.RemoveMasked)
                 builder.RemoveMasked();

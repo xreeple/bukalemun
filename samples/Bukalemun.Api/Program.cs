@@ -29,8 +29,11 @@ app.MapGet(
             Id = "1",
             Email = "test@test.com",
             Name = "Mehmet",
+            FullName = "Mehmet Emin Eker",
             //IdentityNumber = "123123123123123",
         };
+
+        user.ApplyMasking();
 
         await bukalemun.CamouflageAsync(user);
 
@@ -177,6 +180,9 @@ public class User
 
     [Camouflageable]
     public string Name { get; set; } = null!;
+
+    [Mask(RevealInitialsPerWord = 2, PreserveWhitespace = true)]
+    public string FullName { get; set; } = null!;
 
     [Camouflageable("Kimlik")]
     public string IdentityNumber { get; set; } = null!;
