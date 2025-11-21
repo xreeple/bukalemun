@@ -12,10 +12,11 @@ internal sealed class Bukalemun(ICamouflageService _camouflageService) : IBukale
         string table,
         string key,
         string column,
-        string value
+        string value,
+        bool upsert = false
     )
     {
-        await _camouflageService.CreateAsync(store, table, key, column, value);
+        await _camouflageService.CreateAsync(store, table, key, column, value, upsert);
     }
 
     public async Task CamouflageAsync<T>(T obj)

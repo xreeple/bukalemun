@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.VisualBasic;
 using Xreeple.Bukalemun.Data.Abstractions;
 using Xreeple.Bukalemun.Data.Entites;
 
@@ -6,6 +7,34 @@ namespace Xreeple.Bukalemun.Postgresql.Repositories;
 
 internal class CamouflageRepository(IDbContext _dbContext) : ICamouflageRepository
 {
+    public async Task<bool> InsertAsync(Camouflaged camouflaged)
+    {
+        using var connection = _dbContext.CreateConnection();
+
+        var sql = $"""
+                INSERT INTO "{camouflaged.Store}" (
+                    "Table", 
+                    "Key", 
+                    "Column", 
+                    "Encrypted", 
+                    "CreatedAt", 
+                    "UpdatedAt"
+                )
+                VALUES (
+                    @Table, 
+                    @Key, 
+                    @Column, 
+                    @Encrypted, 
+                    @CreatedAt, 
+                    @UpdatedAt
+                )
+                ON CONFLICT ("Table", "Key", "Column") 
+                DO NOTHING
+            """;
+
+        return await connection.ExecuteAsync(sql, camouflaged) == 1;
+    }
+
     public async Task<bool> UpsertAsync(Camouflaged camouflaged)
     {
         using var connection = _dbContext.CreateConnection();

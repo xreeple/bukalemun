@@ -20,22 +20,39 @@ internal sealed class CamouflageService(
         string table,
         string key,
         string column,
-        string value
+        string value,
+        bool upsert = false
     )
     {
         var encryptKey = _bukalemunOptions.Value.Stores[store].EncryptKey;
         var encrypted = _cryptoProvider.Encrypt(encryptKey, value);
 
-        await _camouflageRepository.UpsertAsync(
-            new Data.Entites.Camouflaged()
-            {
-                Store = store,
-                Table = table,
-                Key = key,
-                Column = column,
-                Encrypted = encrypted,
-            }
-        );
+        if (upsert)
+        {
+            await _camouflageRepository.UpsertAsync(
+                new Data.Entites.Camouflaged()
+                {
+                    Store = store,
+                    Table = table,
+                    Key = key,
+                    Column = column,
+                    Encrypted = encrypted,
+                }
+            );
+        }
+        else
+        {
+            await _camouflageRepository.InsertAsync(
+                new Data.Entites.Camouflaged()
+                {
+                    Store = store,
+                    Table = table,
+                    Key = key,
+                    Column = column,
+                    Encrypted = encrypted,
+                }
+            );
+        }
     }
 
     public async Task<Uncamouflaged?> GetAsync(
