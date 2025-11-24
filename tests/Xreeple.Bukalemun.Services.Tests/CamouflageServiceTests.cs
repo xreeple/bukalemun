@@ -61,13 +61,17 @@ namespace Xreeple.Bukalemun.Services.Tests
                 .Setup(r => r.UpsertAsync(It.IsAny<CamouflagedEntity>()))
                 .ReturnsAsync(true);
 
+            _camouflageRepoMock!
+                .Setup(r => r.InsertAsync(It.IsAny<CamouflagedEntity>()))
+                .ReturnsAsync(true);
+
             // Act
             await _camouflageService!.CreateAsync(store, table, key, column, value);
 
             // Assert
             _camouflageRepoMock.Verify(
                 r =>
-                    r.UpsertAsync(
+                    r.InsertAsync(
                         It.Is<CamouflagedEntity>(c =>
                             c.Store == store
                             && c.Table == table
