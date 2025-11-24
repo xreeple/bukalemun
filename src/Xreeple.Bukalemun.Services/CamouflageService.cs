@@ -21,7 +21,7 @@ internal sealed class CamouflageService(
         string key,
         string column,
         string value,
-        bool upsert = false
+        bool upsert
     )
     {
         var encryptKey = _bukalemunOptions.Value.Stores[store].EncryptKey;
@@ -152,7 +152,7 @@ internal sealed class CamouflageService(
         return uncamouflaged;
     }
 
-    public async Task CreateAsync<T>(T obj)
+    public async Task CreateAsync<T>(T obj, bool upsert = false)
         where T : new()
     {
         ExtractCamouflageMetadata(
@@ -180,7 +180,7 @@ internal sealed class CamouflageService(
                 continue;
             }
 
-            await CreateAsync(store, table, key, column, value);
+            await CreateAsync(store, table, key, column, value, upsert);
         }
     }
 

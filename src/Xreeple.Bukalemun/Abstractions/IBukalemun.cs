@@ -16,7 +16,7 @@ public interface IBukalemun
     /// <param name="column">The column name to camouflage.</param>
     /// <param name="value">The value to camouflage (encrypt).</param>
     Task CamouflageAsync(string store, string table, string key, string column, string value, bool upsert = false);
-    Task CamouflageAsync<T>(T obj)
+    Task CamouflageAsync<T>(T obj, bool upsert = false)
         where T : new();
     Task<T> UncamouflageAsync<T>(T obj)
         where T : new();

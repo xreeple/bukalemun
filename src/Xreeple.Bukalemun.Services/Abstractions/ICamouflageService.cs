@@ -5,7 +5,7 @@ namespace Xreeple.Bukalemun.Services.Abstractions;
 internal interface ICamouflageService
 {
     Task CreateAsync(string store, string table, string key, string column, string value, bool upsert = false);
-    Task CreateAsync<T>(T obj)
+    Task CreateAsync<T>(T obj, bool upsert = false)
         where T : new();
     Task<Uncamouflaged?> GetAsync(string store, string table, string key, string column);
     Task<IEnumerable<Uncamouflaged>> GetAsync(
