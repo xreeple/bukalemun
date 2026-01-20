@@ -1,19 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net7.0;net9.0</TargetFrameworks>
+    <LangVersion>12.0</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="Npgsql" Version="9.0.3" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Xreeple.Bukalemun.DependencyInjectionExtensions\Xreeple.Bukalemun.DependencyInjectionExtensions.csproj" />
     <ProjectReference Include="..\Xreeple.Bukalemun.Data\Xreeple.Bukalemun.Data.csproj" />
   </ItemGroup>
-
 </Project>

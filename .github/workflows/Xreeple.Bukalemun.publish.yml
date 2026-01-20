@@ -26,18 +26,11 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore src/Xreeple.Bukalemun/Xreeple.Bukalemun.csproj
 
-      - name: Publish project
-        run: dotnet publish src/Xreeple.Bukalemun/Xreeple.Bukalemun.csproj --configuration Release --output src/Xreeple.Bukalemun/publish/net9.0 --framework net9.0
-
       - name: Pack NuGet package
-        run: nuget pack src/Xreeple.Bukalemun/Xreeple.Bukalemun.nuspec
-
-      - name: Setup NuGet CLI
-        uses: nuget/setup-nuget@v1
-        with:
-          nuget-version: '5.x'
-
+        run: dotnet pack src/Xreeple.Bukalemun/Xreeple.Bukalemun.csproj -c Release -p:NuspecFile=Xreeple.Bukalemun.nuspec
+        
       - name: Push NuGet package
+        shell: bash
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: nuget push *.nupkg -src https://api.nuget.org/v3/index.json ${{secrets.NUGET_API_KEY}}
+        run: dotnet nuget push src/Xreeple.Bukalemun/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate

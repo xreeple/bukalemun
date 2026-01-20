@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Xreeple.Bukalemun.Providers</id>
 		<title>Xreeple.Bukalemun.Providers</title>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 		<authors>Xreeple</authors>
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/xreeple</projectUrl>
@@ -13,15 +13,18 @@
 		<copyright>Copyright © 2025 Xreeple</copyright>
 		<tags>secure data encryption sensitive personal dotnet</tags>
 		<icon>chameleon.png</icon>
+		
 		<dependencies>
+			<group targetFramework="net9.0" />
+			<group targetFramework="net7.0" />
 			<dependency id="BCrypt.Net-Next" version="4.0.3" />
 			<dependency id="CryptoNet" version="2.4.0" />
 		</dependencies>
 	</metadata>
 
 	<files>
-		<file src="publish\net9.0\Xreeple.Bukalemun.Providers.dll" target="lib\net9.0" />
-		<file src="publish\net9.0\Xreeple.Bukalemun.Providers.pdb" target="lib\net9.0" />
+		<file src="bin\Release\net9.0\Xreeple.Bukalemun.Providers.dll" target="lib\net9.0" />
+		<file src="bin\Release\net7.0\Xreeple.Bukalemun.Providers.dll" target="lib\net7.0" />
 		<file src="LICENSE" />
 		<file src="chameleon.png" />
 	</files>
