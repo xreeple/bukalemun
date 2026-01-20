@@ -15,12 +15,19 @@
 		<icon>chameleon.png</icon>
 		
 		<dependencies>
-			<group targetFramework="net9.0" />
-			<group targetFramework="net7.0" />
-			<dependency id="Dapper" version="2.1.66" />
-			<dependency id="Npgsql" version="9.0.3" />
-			<dependency id="Xreeple.Bukalemun.Data" version="1.0.1" />
-			<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.1" />
+			<group targetFramework="net9.0">
+				<dependency id="Dapper" version="2.1.66" />
+				<dependency id="Npgsql" version="9.0.3" />
+				<dependency id="Xreeple.Bukalemun.Data" version="1.0.1" />
+				<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.1" />
+			</group>
+
+			<group targetFramework="net7.0">
+				<dependency id="Dapper" version="2.1.66" />
+				<dependency id="Npgsql" version="9.0.3" />
+				<dependency id="Xreeple.Bukalemun.Data" version="1.0.1" />
+				<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.1" />
+			</group>
 		</dependencies>
 	</metadata>
 

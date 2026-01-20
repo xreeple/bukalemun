@@ -15,10 +15,15 @@
 		<icon>chameleon.png</icon>
 		
 		<dependencies>
-			<group targetFramework="net9.0" />
-			<group targetFramework="net7.0" />
-			<dependency id="BCrypt.Net-Next" version="4.0.3" />
-			<dependency id="CryptoNet" version="2.4.0" />
+			<group targetFramework="net9.0">
+				<dependency id="BCrypt.Net-Next" version="4.0.3" />
+				<dependency id="CryptoNet" version="2.4.0" />
+			</group>
+			
+			<group targetFramework="net7.0">
+				<dependency id="BCrypt.Net-Next" version="4.0.3" />
+				<dependency id="CryptoNet" version="2.4.0" />
+			</group>
 		</dependencies>
 	</metadata>
 
