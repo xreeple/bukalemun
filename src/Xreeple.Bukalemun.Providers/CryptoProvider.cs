@@ -1,4 +1,5 @@
-﻿using CryptoNet;
+﻿using System.Text;
+using CryptoNet;
 using Xreeple.Bukalemun.Providers.Abstractions;
 
 namespace Xreeple.Bukalemun.Providers;
@@ -10,7 +11,8 @@ internal class CryptoProvider : ICryptoProvider
         byte[] _key = Convert.FromBase64String(key);
         byte[] _iv = RandomByteArray(16);
 
-        var encrypt = new CryptoNetAes(_key, _iv).EncryptFromString(content);
+        byte[] contentBytes = Encoding.UTF8.GetBytes(content);
+        var encrypt = new CryptoNetAes(_key, _iv).EncryptFromBytes(contentBytes);
 
         encrypt = [.. _iv, .. encrypt];
 
@@ -23,7 +25,8 @@ internal class CryptoProvider : ICryptoProvider
         byte[] _iv = content[..16];
         byte[] _content = content[16..];
 
-        var decrypt = new CryptoNetAes(_key, _iv).DecryptToString(_content);
+        var decryptedBytes = new CryptoNetAes(_key, _iv).DecryptToBytes(_content);
+        var decrypt = Encoding.UTF8.GetString(decryptedBytes);
 
         return decrypt;
     }

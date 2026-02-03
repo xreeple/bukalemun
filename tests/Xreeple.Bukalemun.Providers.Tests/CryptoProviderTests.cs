@@ -35,6 +35,20 @@ public class CryptoProviderTests
     }
 
     [Test]
+    public void Encrypt_And_Decrypt_Turkish_Characters_Should_Return_Original_Content()
+    {
+        // Arrange
+        string originalContent = "Şifreleme İçin Ğüzel Çözüm Önerisi";
+
+        // Act
+        var encrypted = _cryptoProvider.Encrypt(_key, originalContent);
+        var decrypted = _cryptoProvider.Decrypt(_key, encrypted);
+
+        // Assert
+        Assert.AreEqual(originalContent, decrypted);
+    }
+
+    [Test]
     public void Encrypted_Content_Should_Contain_IV()
     {
         // Arrange

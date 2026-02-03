@@ -9,7 +9,7 @@
 		<projectUrl>https://github.com/xreeple</projectUrl>
 		<repository type="git" url="https://github.com/xreeple/bukalemun.git" />
 		<description>Bukalemun is a flexible and Secure Data Encryption Library for .NET Bukalemun is a lightweight and flexible encryption library for .NET applications, designed to securely store sensitive and personal data in databases.</description>
-		<releaseNotes>Initial release.</releaseNotes>
+		<releaseNotes>Updated dependencies to 1.0.2 for Turkish character encoding fix in encryption/decryption.</releaseNotes>
 		<copyright>Copyright © 2025 Xreeple</copyright>
 		<tags>secure data encryption sensitive personal dotnet</tags>
 		<icon>chameleon.png</icon>
@@ -19,14 +19,14 @@
 				<dependency id="Dapper" version="2.1.66" />
 				<dependency id="Npgsql" version="9.0.3" />
 				<dependency id="Xreeple.Bukalemun.Data" version="1.0.1" />
-				<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.1" />
+				<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.2" />
 			</group>
 
 			<group targetFramework="net7.0">
 				<dependency id="Dapper" version="2.1.66" />
 				<dependency id="Npgsql" version="7.0.7" />
 				<dependency id="Xreeple.Bukalemun.Data" version="1.0.1" />
-				<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.1" />
+				<dependency id="Xreeple.Bukalemun.DependencyInjectionExtensions" version="1.0.2" />
 			</group>
 		</dependencies>
 	</metadata>

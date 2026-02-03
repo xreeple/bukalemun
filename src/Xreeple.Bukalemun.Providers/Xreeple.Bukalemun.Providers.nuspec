@@ -3,13 +3,13 @@
 	<metadata>
 		<id>Xreeple.Bukalemun.Providers</id>
 		<title>Xreeple.Bukalemun.Providers</title>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 		<authors>Xreeple</authors>
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/xreeple</projectUrl>
 		<repository type="git" url="https://github.com/xreeple/bukalemun.git" />
 		<description>Bukalemun is a flexible and Secure Data Encryption Library for .NET Bukalemun is a lightweight and flexible encryption library for .NET applications, designed to securely store sensitive and personal data in databases.</description>
-		<releaseNotes>Initial release.</releaseNotes>
+		<releaseNotes>Fixed Turkish character (Ş, Ğ, İ, Ç, Ö, Ü) encoding issue in encryption/decryption. Now properly handles Unicode characters using UTF-8 encoding. Note: Data encrypted with previous versions may need to be re-encrypted.</releaseNotes>
 		<copyright>Copyright © 2025 Xreeple</copyright>
 		<tags>secure data encryption sensitive personal dotnet</tags>
 		<icon>chameleon.png</icon>
